@@ -400,3 +400,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 /Book-DB
+appsettings.json
