@@ -16,10 +16,19 @@ namespace Book_App_API.Controllers
         }
 
         [HttpGet(Name = "GetGenre")]
-        public async Task<List<Genre>> Get()
+        [ProducesResponseType(typeof(List<Genre>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Get()
         {
-            List<Genre> genres = await _genreLogic.GetGenres();
-            return genres;
+            try
+            {
+                List<Genre> genres = await _genreLogic.GetGenres();
+                return Ok(genres);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

@@ -14,7 +14,16 @@ namespace Book_App_API.Logic
 
         public async Task<List<Genre>> GetGenres()
         {
-            return await _dbLogic.GetGenres();
+            try
+            {
+                return await _dbLogic.GetGenres();
+            }
+            catch (Exception ex)
+            {
+                //TODO Log the error
+
+                throw ex;
+            }
         }
     }
 }

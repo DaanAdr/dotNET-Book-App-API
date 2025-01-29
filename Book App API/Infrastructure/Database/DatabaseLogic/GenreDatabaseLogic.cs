@@ -14,7 +14,8 @@ namespace Book_App_API.Infrastructure.Database.Logic
 
         public async Task<List<Genre>> GetGenres()
         {
-            return await _dbContext.Genres.ToListAsync();
+            //AsNoTracking makes this function a readonly function, making it more efficient
+            return await _dbContext.Genres.AsNoTracking().ToListAsync();
         }
     }
 }
