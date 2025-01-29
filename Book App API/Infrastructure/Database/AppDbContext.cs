@@ -11,7 +11,7 @@ namespace Book_App_API.Infrastructure.Database
                 
         }
 
-        DbSet<Genre> Genres { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
