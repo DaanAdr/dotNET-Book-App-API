@@ -401,3 +401,4 @@ FodyWeavers.xsd
 
 /Book-DB
 appsettings.json
+appsettings.Development.json
