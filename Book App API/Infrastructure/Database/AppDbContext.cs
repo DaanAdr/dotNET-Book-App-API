@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Book_App_API.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Book_App_API.Infrastructure.Database
 {
@@ -8,5 +9,7 @@ namespace Book_App_API.Infrastructure.Database
         {
                 
         }
+
+        DbSet<Genre> Genres { get; set; }
     }
 }
