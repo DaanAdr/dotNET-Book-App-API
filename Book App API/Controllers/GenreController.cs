@@ -25,7 +25,7 @@ namespace Book_App_API.Controllers
                 List<Genre> genres = await _genreLogic.GetGenres();
                 return Ok(genres);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }

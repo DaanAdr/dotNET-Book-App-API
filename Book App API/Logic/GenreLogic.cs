@@ -18,11 +18,11 @@ namespace Book_App_API.Logic
             {
                 return await _dbLogic.GetGenres();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //TODO Log the error
 
-                throw ex;
+                throw;
             }
         }
     }
