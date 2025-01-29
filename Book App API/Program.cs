@@ -1,4 +1,6 @@
 using Book_App_API.Infrastructure.Database;
+using Book_App_API.Infrastructure.Database.Logic;
+using Book_App_API.Logic;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,9 @@ builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
 {
     optionsBuilder.UseSqlServer(builder.Configuration["DBConnectionString"]!);
 });
+
+builder.Services.AddScoped<GenreDatabaseLogic>();
+builder.Services.AddScoped<GenreLogic>();
 
 var app = builder.Build();
 

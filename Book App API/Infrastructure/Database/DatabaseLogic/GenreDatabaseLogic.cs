@@ -6,6 +6,12 @@ namespace Book_App_API.Infrastructure.Database.Logic
     public class GenreDatabaseLogic
     {
         private readonly AppDbContext _dbContext;
+
+        public GenreDatabaseLogic(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public async Task<List<Genre>> GetGenres()
         {
             return await _dbContext.Genres.ToListAsync();
