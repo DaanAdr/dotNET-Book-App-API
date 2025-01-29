@@ -12,6 +12,7 @@ namespace Book_App_API.Infrastructure.Database
         }
 
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Author> Author { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
