@@ -76,6 +76,8 @@ namespace Book_App_API.Logic
             }
             catch (Exception)
             {
+                //TODO Log the error
+
                 throw;
             }
         }
@@ -92,6 +94,20 @@ namespace Book_App_API.Logic
             if(authorPatch.Surname != null)
             {
                 author.Surname = authorPatch.Surname;
+            }
+        }
+
+        public async Task<bool> DeleteAuthor(string id)
+        {
+            try
+            {
+                return await _dbLogic.DeleteAuthor(Guid.Parse(id));
+            }
+            catch (Exception)
+            {
+                //TODO Log the error
+
+                throw;
             }
         }
     }

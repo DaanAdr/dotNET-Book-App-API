@@ -51,5 +51,20 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
             await _dbContext.SaveChangesAsync();
             return author;
         }
+
+        public async Task<bool> DeleteAuthor(Guid id)
+        {
+            Author author = await GetAuthorById(id);
+
+            if (author != null) 
+            {
+                _dbContext.Author.Remove(author);
+                await _dbContext.SaveChangesAsync();
+
+                return true;
+            }
+
+            throw new KeyNotFoundException($"Author with ID {id} not found.");
+        }
     }
 }
