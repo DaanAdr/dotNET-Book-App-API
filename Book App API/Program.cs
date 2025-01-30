@@ -1,4 +1,5 @@
 using Book_App_API.Infrastructure.Database;
+using Book_App_API.Infrastructure.Database.DatabaseLogic;
 using Book_App_API.Infrastructure.Database.Logic;
 using Book_App_API.Logic;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,9 @@ builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
 
 builder.Services.AddScoped<GenreDatabaseLogic>();
 builder.Services.AddScoped<GenreLogic>();
+
+builder.Services.AddScoped<AuthorDatabaseLogic>();
+builder.Services.AddScoped<AuthorLogic>();
 
 var app = builder.Build();
 
