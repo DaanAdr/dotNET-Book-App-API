@@ -4,6 +4,7 @@ using Book_App_API.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_App_API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250130134838_ReaderAgesTable")]
+    partial class ReaderAgesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,38 +183,6 @@ namespace Book_App_API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ReaderAges");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ba9cc1c4-fc08-4ded-a5fd-289f4748cec0"),
-                            AgeRange = "Picture Books (Ages 0-5)"
-                        },
-                        new
-                        {
-                            Id = new Guid("7bb41b2d-f163-4604-bd7a-e15ae0d9fbfe"),
-                            AgeRange = "Early Readers (Ages 5-7)"
-                        },
-                        new
-                        {
-                            Id = new Guid("1c09c0dc-946b-412c-82f5-a877cc383bf2"),
-                            AgeRange = "Chapter Books (Ages 7-9)"
-                        },
-                        new
-                        {
-                            Id = new Guid("6e7f81e0-74f2-4706-9e6f-d891007877fc"),
-                            AgeRange = "Middle Grade (Ages 8-12)"
-                        },
-                        new
-                        {
-                            Id = new Guid("e4a6087f-f8c0-473e-8abe-2abeba324833"),
-                            AgeRange = "Young Adult (YA) (Ages 12-18)"
-                        },
-                        new
-                        {
-                            Id = new Guid("729ca0c2-2b61-45e5-82c7-78b6680bdd31"),
-                            AgeRange = "Adult (Ages 18+)"
-                        });
                 });
 #pragma warning restore 612, 618
         }
