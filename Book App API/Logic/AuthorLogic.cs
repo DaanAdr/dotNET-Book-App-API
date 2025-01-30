@@ -28,11 +28,11 @@ namespace Book_App_API.Logic
             }
         }
 
-        public async Task<Author> PostAuthor(AuthorDTO author)
+        public async Task<Author> PostAuthor(AuthorPostDTO author)
         {
             try
             {
-                Author newAuthor = ConvertDtoToEntity(author);
+                Author newAuthor = ConvertPostDtoToEntity(author);
 
                 return await _dbLogic.PostAuthor(newAuthor);
             }
@@ -44,7 +44,7 @@ namespace Book_App_API.Logic
             }
         }
 
-        private Author ConvertDtoToEntity(AuthorDTO author) 
+        private Author ConvertPostDtoToEntity(AuthorPostDTO author) 
         { 
             Author newAuthor = new Author()
             {
@@ -53,6 +53,55 @@ namespace Book_App_API.Logic
             };
 
             return newAuthor;
+        }
+
+        public async Task<Author> PatchAuthor(string id, AuthorPatchDTO authorPatch)
+        {
+            try
+            {
+                //Find author at ID
+                Author foundAuthor = await _dbLogic.GetAuthorById(id);
+
+                //If no author found, return error
+
+                //Apply changes from patchDTO
+                Author patchedAuthor = ApplyPatchData(foundAuthor, authorPatch);
+
+                //Save patch data to database
+                return await _dbLogic.SavePatchedAuthor(patchedAuthor);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private Author ApplyPatchData(Author author, AuthorPatchDTO authorPatch)
+        {
+            Author patchedAuthor = new Author();
+            patchedAuthor.Id = author.Id;
+
+            //Patch firstname if necessary
+            if(authorPatch.Firstname != null)
+            {
+                patchedAuthor.Firstname = authorPatch.Firstname;
+            }
+            else
+            {
+                patchedAuthor.Firstname = author.Firstname;
+            }
+
+            //Patch surname if necessary
+            if(authorPatch.Surname != null)
+            {
+                patchedAuthor.Surname = authorPatch.Surname;
+            }
+            else
+            {
+                patchedAuthor.Surname= author.Surname;
+            }
+
+            return patchedAuthor;
         }
     }
 }

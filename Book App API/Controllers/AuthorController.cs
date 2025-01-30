@@ -32,11 +32,11 @@ namespace Book_App_API.Controllers
             }
         }
 
-        [HttpPost(Name = "PostAuthors")]
+        [HttpPost(Name = "PostAuthor")]
         [ProducesResponseType(typeof(Author), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post([FromBody]AuthorDTO author)
+        public async Task<IActionResult> Post([FromBody]AuthorPostDTO author)
         {
             // Automatic validation of the AuthorDTO based on data annotations
             if (!ModelState.IsValid)
@@ -48,12 +48,34 @@ namespace Book_App_API.Controllers
             try
             {
                 Author response = await _authorLogic.PostAuthor(author);
-                //return Ok(response);
+
                 return Created(nameof(Post), response);
             }
-            catch (ArgumentException ex) // Catch specific exceptions for validation
+            catch (Exception)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPatch("{id}")]
+        [ProducesResponseType(typeof(Author), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Patch(string id, [FromBody] AuthorPatchDTO author)
+        {
+            //Automatic validation of the AuthorDTO based on data annotations
+            if (!ModelState.IsValid)
+            {
+                var test = ModelState.Values.SelectMany(v => v.Errors);
+
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                Author response = await _authorLogic.PatchAuthor(id, author);
+
+                return Ok(response);
             }
             catch (Exception)
             {

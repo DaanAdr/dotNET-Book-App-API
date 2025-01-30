@@ -2,7 +2,7 @@
 
 namespace Book_App_API.Domain.DTO
 {
-    public class AuthorDTO
+    public class AuthorPostDTO
     {
         [Required(ErrorMessage = "Firstname is required.")]
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Firstname can only contain letters.")]

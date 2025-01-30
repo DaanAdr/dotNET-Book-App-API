@@ -23,6 +23,11 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
             return await _dbContext.Author.FirstOrDefaultAsync(a => a.Firstname == author.Firstname && a.Surname == a.Surname);
         }
 
+        public async Task<Author> GetAuthorById(string id)
+        {
+            return await _dbContext.Author.FindAsync(id);
+        }
+
         public async Task<Author> PostAuthor(Author author)
         {
             //Check if author already exists
@@ -35,6 +40,13 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
             }
 
             //Create new author if none were found
+            _dbContext.Author.Add(author);
+            await _dbContext.SaveChangesAsync();
+            return author;
+        }
+
+        public async Task<Author> SavePatchedAuthor(Author author)
+        {
             _dbContext.Author.Add(author);
             await _dbContext.SaveChangesAsync();
             return author;
