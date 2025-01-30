@@ -34,18 +34,25 @@ namespace Book_App_API.Controllers
 
         [HttpPost(Name = "PostAuthors")]
         [ProducesResponseType(typeof(Author), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody]AuthorDTO author)
         {
-            if (author == null)
+            // Automatic validation of the AuthorDTO based on data annotations
+            if (!ModelState.IsValid)
             {
-                return BadRequest("Please provide author data.");
+                // Return a 400 Bad Request with the validation errors
+                return BadRequest(ModelState);
             }
 
             try
             {
                 Author response = await _authorLogic.PostAuthor(author);
                 return Ok(response);
+            }
+            catch (ArgumentException ex) // Catch specific exceptions for validation
+            {
+                return BadRequest(ex.Message);
             }
             catch (Exception)
             {

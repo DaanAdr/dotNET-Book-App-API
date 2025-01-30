@@ -1,6 +1,7 @@
 ﻿using Book_App_API.Domain.DTO;
 using Book_App_API.Domain.Entity;
 using Book_App_API.Infrastructure.Database.DatabaseLogic;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Book_App_API.Logic
 {
@@ -31,14 +32,7 @@ namespace Book_App_API.Logic
         {
             try
             {
-                //TODO Validate AuthorDTO
-
-                //Convert DTO to Author
-                Author newAuthor = new Author()
-                {
-                    Firstname = author.Firstname,
-                    Surname = author.Surname,
-                };
+                Author newAuthor = ConvertDtoToEntity(author);
 
                 return await _dbLogic.PostAuthor(newAuthor);
             }
@@ -48,6 +42,17 @@ namespace Book_App_API.Logic
 
                 throw;
             }
+        }
+
+        private Author ConvertDtoToEntity(AuthorDTO author) 
+        { 
+            Author newAuthor = new Author()
+            {
+                Firstname = author.Firstname,
+                Surname = author.Surname,
+            };
+
+            return newAuthor;
         }
     }
 }
