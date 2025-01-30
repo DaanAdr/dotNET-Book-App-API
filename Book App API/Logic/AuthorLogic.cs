@@ -1,7 +1,6 @@
 ﻿using Book_App_API.Domain.DTO;
 using Book_App_API.Domain.Entity;
 using Book_App_API.Infrastructure.Database.DatabaseLogic;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Book_App_API.Logic
 {
@@ -60,7 +59,7 @@ namespace Book_App_API.Logic
             try
             {
                 //Find author at ID
-                Author author = await _dbLogic.GetAuthorById(Guid.Parse(id));
+                Author? author = await _dbLogic.GetAuthorById(Guid.Parse(id));
 
                 //If no author found, return error
                 if (author == null)
@@ -82,6 +81,11 @@ namespace Book_App_API.Logic
             }
         }
 
+        /// <summary>
+        /// Apply the data in authorPatch to author
+        /// </summary>
+        /// <param name="author">The object to patch</param>
+        /// <param name="authorPatch">Data to patch author with</param>
         private void ApplyPatchData(Author author, AuthorPatchDTO authorPatch)
         {
             //Patch firstname if necessary

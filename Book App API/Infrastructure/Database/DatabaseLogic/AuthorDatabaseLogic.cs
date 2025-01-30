@@ -1,5 +1,4 @@
-﻿using Book_App_API.Controllers;
-using Book_App_API.Domain.Entity;
+﻿using Book_App_API.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_App_API.Infrastructure.Database.DatabaseLogic
@@ -18,12 +17,12 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
             return await _dbContext.Author.AsNoTracking().ToListAsync();
         }
 
-        private async Task<Author> GetAuthorByName(Author author)
+        private async Task<Author?> GetAuthorByName(Author author)
         {
             return await _dbContext.Author.FirstOrDefaultAsync(a => a.Firstname == author.Firstname && a.Surname == a.Surname);
         }
 
-        public async Task<Author> GetAuthorById(Guid id)
+        public async Task<Author?> GetAuthorById(Guid id)
         {
             return await _dbContext.Author.FindAsync(id);
         }
@@ -31,7 +30,7 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
         public async Task<Author> PostAuthor(Author author)
         {
             //Check if author already exists
-            Author foundAuthor = await GetAuthorByName(author);
+            Author? foundAuthor = await GetAuthorByName(author);
 
             //Return found author
             if (foundAuthor != null)
@@ -54,7 +53,7 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
 
         public async Task<bool> DeleteAuthor(Guid id)
         {
-            Author author = await GetAuthorById(id);
+            Author? author = await GetAuthorById(id);
 
             if (author != null) 
             {
