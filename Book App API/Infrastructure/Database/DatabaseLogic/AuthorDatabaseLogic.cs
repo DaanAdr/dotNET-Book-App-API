@@ -16,5 +16,12 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
         {
             return await _dbContext.Author.AsNoTracking().ToListAsync();
         }
+
+        public async Task<Author> PostAuthor(Author author)
+        {
+            _dbContext.Author.Add(author);
+            await _dbContext.SaveChangesAsync();
+            return author;
+        }
     }
 }

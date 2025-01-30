@@ -1,4 +1,5 @@
-﻿using Book_App_API.Domain.Entity;
+﻿using Book_App_API.Domain.DTO;
+using Book_App_API.Domain.Entity;
 using Book_App_API.Logic;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,27 @@ namespace Book_App_API.Controllers
             {
                 List<Author> authors = await _authorLogic.GetAuthors();
                 return Ok(authors);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPost(Name = "PostAuthors")]
+        [ProducesResponseType(typeof(Author), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Post([FromBody]AuthorDTO author)
+        {
+            if (author == null)
+            {
+                return BadRequest("Please provide author data.");
+            }
+
+            try
+            {
+                Author response = await _authorLogic.PostAuthor(author);
+                return Ok(response);
             }
             catch (Exception)
             {
