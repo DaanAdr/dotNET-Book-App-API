@@ -16,7 +16,7 @@ namespace Book_App_API.Controllers
             _authorLogic = authorLogic;
         }
 
-        [HttpGet(Name = "GetAuthors")]
+        [HttpGet]
         [ProducesResponseType(typeof(List<Author>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
@@ -32,7 +32,7 @@ namespace Book_App_API.Controllers
             }
         }
 
-        [HttpPost(Name = "PostAuthor")]
+        [HttpPost]
         [ProducesResponseType(typeof(Author), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
@@ -66,8 +66,6 @@ namespace Book_App_API.Controllers
             //Automatic validation of the AuthorDTO based on data annotations
             if (!ModelState.IsValid)
             {
-                var test = ModelState.Values.SelectMany(v => v.Errors);
-
                 return BadRequest(ModelState);
             }
 
