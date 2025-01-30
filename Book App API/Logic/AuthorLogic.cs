@@ -63,6 +63,10 @@ namespace Book_App_API.Logic
                 Author author = await _dbLogic.GetAuthorById(Guid.Parse(id));
 
                 //If no author found, return error
+                if (author == null)
+                {
+                    throw new KeyNotFoundException($"Author with ID {id} not found.");
+                }
 
                 //Apply changes from patchDTO
                 ApplyPatchData(author, authorPatch);

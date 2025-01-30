@@ -60,6 +60,7 @@ namespace Book_App_API.Controllers
         [HttpPatch("{id}")]
         [ProducesResponseType(typeof(Author), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Patch(string id, [FromBody] AuthorPatchDTO author)
         {
@@ -75,7 +76,11 @@ namespace Book_App_API.Controllers
 
                 return Ok(response);
             }
-            catch (Exception)
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
