@@ -60,15 +60,15 @@ namespace Book_App_API.Logic
             try
             {
                 //Find author at ID
-                Author foundAuthor = await _dbLogic.GetAuthorById(id);
+                Author author = await _dbLogic.GetAuthorById(Guid.Parse(id));
 
                 //If no author found, return error
 
                 //Apply changes from patchDTO
-                Author patchedAuthor = ApplyPatchData(foundAuthor, authorPatch);
+                ApplyPatchData(author, authorPatch);
 
                 //Save patch data to database
-                return await _dbLogic.SavePatchedAuthor(patchedAuthor);
+                return await _dbLogic.SavePatchedAuthor(author);
             }
             catch (Exception)
             {
@@ -76,32 +76,19 @@ namespace Book_App_API.Logic
             }
         }
 
-        private Author ApplyPatchData(Author author, AuthorPatchDTO authorPatch)
+        private void ApplyPatchData(Author author, AuthorPatchDTO authorPatch)
         {
-            Author patchedAuthor = new Author();
-            patchedAuthor.Id = author.Id;
-
             //Patch firstname if necessary
             if(authorPatch.Firstname != null)
             {
-                patchedAuthor.Firstname = authorPatch.Firstname;
-            }
-            else
-            {
-                patchedAuthor.Firstname = author.Firstname;
+                author.Firstname = authorPatch.Firstname;
             }
 
             //Patch surname if necessary
             if(authorPatch.Surname != null)
             {
-                patchedAuthor.Surname = authorPatch.Surname;
+                author.Surname = authorPatch.Surname;
             }
-            else
-            {
-                patchedAuthor.Surname= author.Surname;
-            }
-
-            return patchedAuthor;
         }
     }
 }
