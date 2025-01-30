@@ -14,6 +14,9 @@ namespace Book_App_API.Infrastructure.Database
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Author> Author { get; set; }
         public DbSet<ReaderAge> ReaderAges { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<BookGenre> BookGenres { get; set; }
+        public DbSet<BookAuthor> BookAuthor { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
