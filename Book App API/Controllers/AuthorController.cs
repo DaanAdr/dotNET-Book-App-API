@@ -33,7 +33,7 @@ namespace Book_App_API.Controllers
         }
 
         [HttpPost(Name = "PostAuthors")]
-        [ProducesResponseType(typeof(Author), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Author), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody]AuthorDTO author)
@@ -48,7 +48,8 @@ namespace Book_App_API.Controllers
             try
             {
                 Author response = await _authorLogic.PostAuthor(author);
-                return Ok(response);
+                //return Ok(response);
+                return Created(nameof(Post), response);
             }
             catch (ArgumentException ex) // Catch specific exceptions for validation
             {
