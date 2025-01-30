@@ -13,18 +13,18 @@ namespace Book_App_API.Infrastructure.Database
 
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Author> Author { get; set; }
+        public DbSet<ReaderAge> ReaderAges { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Get seed data for genres
-            List<Genre> genreSeedData = GenreSeedData.GetGenreSeedData();
+            //Seed genre
+            modelBuilder.Entity<Genre>().HasData(BooksSeedData.genreSeedData);
 
-            modelBuilder.Entity<Genre>().HasData(genreSeedData);
+            //Seed author
+            modelBuilder.Entity<Author>().HasData(BooksSeedData.authorSeedData);
 
-            //Get seed data for authors
-            List<Author> authorSeedData = AuthorSeedData.GetAuthorSeedData();
-
-            modelBuilder.Entity<Author>().HasData(authorSeedData);
+            //Seed readerAges
+            modelBuilder.Entity<ReaderAge>().HasData(BooksSeedData.readerAgeSeedData);
         }
     }
 }
