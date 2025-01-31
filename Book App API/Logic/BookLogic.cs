@@ -44,6 +44,14 @@ namespace Book_App_API.Logic
                     authors.Add(authorName);
                 }
 
+                //Create list of genres
+                List<string> genres = new List<string>();
+
+                foreach(BookGenre genre in book.BookGenres)
+                {
+                    genres.Add(genre.Genre.GenreName);
+                }
+
                 //Map book to BookGetDTO
                 BookGetDTO mappedBook = new BookGetDTO
                 {
@@ -52,7 +60,8 @@ namespace Book_App_API.Logic
                     ReaderAge = book.ReaderAge.AgeRange,
                     Pages = book.Pages,
                     PublishDate = book.PublishDate,
-                    Authors = authors
+                    Authors = authors,
+                    Genres = genres,
                 };
 
                 mappedBooks.Add(mappedBook);

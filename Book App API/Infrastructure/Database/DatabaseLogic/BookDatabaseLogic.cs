@@ -19,6 +19,8 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
                 .Include(x => x.ReaderAge)
                 .Include(b => b.BookAuthors)
                     .ThenInclude(ba => ba.Author)
+                .Include(b => b.BookGenres)
+                    .ThenInclude(bg => bg.Genre)
                 .ToListAsync();
         }
     }

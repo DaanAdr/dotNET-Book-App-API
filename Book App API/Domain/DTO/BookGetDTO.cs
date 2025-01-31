@@ -9,5 +9,6 @@
         public int Pages { get; set; }
 
         public List<string> Authors { get; set; }
+        public List<string> Genres { get; set; }
     }
 }

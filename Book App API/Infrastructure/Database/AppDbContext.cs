@@ -38,7 +38,7 @@ namespace Book_App_API.Infrastructure.Database
             //Seed bookGenre
             modelBuilder.Entity<BookGenre>().HasData(BooksSeedData.bookGenreSeedData);
 
-            //Junction table logic for bookAuthors
+            //Junction table relation for bookAuthors
             modelBuilder.Entity<BookAuthor>().HasKey(ba => new {ba.AuthorId, ba.BookId});
 
             modelBuilder.Entity<BookAuthor>()
@@ -48,8 +48,21 @@ namespace Book_App_API.Infrastructure.Database
 
             modelBuilder.Entity<BookAuthor>()
                 .HasOne(ba => ba.Author)
-                .WithMany(ba => ba.BookAuthors)
+                .WithMany() // No collection in Author
                 .HasForeignKey(ba => ba.AuthorId);
+
+            //Junction table relation for bookGenre
+            modelBuilder.Entity<BookGenre>().HasKey(bg => new {bg.GenreId, bg.BookId});
+
+            modelBuilder.Entity<BookGenre>()
+                .HasOne(bg => bg.Book)
+                .WithMany(bg => bg.BookGenres)
+                .HasForeignKey(bg => bg.BookId);
+
+            modelBuilder.Entity<BookGenre>()
+                .HasOne(bg => bg.Genre)
+                .WithMany()
+                .HasForeignKey(bg => bg.GenreId);
         }
     }
 }

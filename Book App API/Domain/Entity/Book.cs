@@ -15,5 +15,7 @@ namespace Book_App_API.Domain.Entity
         public ReaderAge ReaderAge { get; set; }
 
         public ICollection<BookAuthor> BookAuthors { get; set; }
+
+        public ICollection<BookGenre> BookGenres { get; set; }
     }
 }
