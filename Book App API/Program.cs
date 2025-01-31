@@ -27,6 +27,9 @@ builder.Services.AddScoped<AuthorLogic>();
 builder.Services.AddScoped<ReaderAgeDatabaseLogic>();
 builder.Services.AddScoped<ReaderAgeLogic>();
 
+builder.Services.AddScoped<BookDatabaseLogic>();
+builder.Services.AddScoped<BookLogic>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
