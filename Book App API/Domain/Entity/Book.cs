@@ -10,5 +10,10 @@ namespace Book_App_API.Domain.Entity
         public Guid ReaderAgeId { get; set; }
         public DateTime PublishDate { get; set; }
         public int Pages { get; set; }
+
+
+        public ReaderAge ReaderAge { get; set; }
+
+        public ICollection<BookAuthor> BookAuthors { get; set; }
     }
 }

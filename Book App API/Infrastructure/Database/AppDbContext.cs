@@ -37,6 +37,19 @@ namespace Book_App_API.Infrastructure.Database
 
             //Seed bookGenre
             modelBuilder.Entity<BookGenre>().HasData(BooksSeedData.bookGenreSeedData);
+
+            //Junction table logic for bookAuthors
+            modelBuilder.Entity<BookAuthor>().HasKey(ba => new {ba.AuthorId, ba.BookId});
+
+            modelBuilder.Entity<BookAuthor>()
+                .HasOne(ba => ba.Books)
+                .WithMany(ba => ba.BookAuthors)
+                .HasForeignKey(ba => ba.BookId);
+
+            modelBuilder.Entity<BookAuthor>()
+                .HasOne(ba => ba.Author)
+                .WithMany(ba => ba.BookAuthors)
+                .HasForeignKey(ba => ba.AuthorId);
         }
     }
 }
