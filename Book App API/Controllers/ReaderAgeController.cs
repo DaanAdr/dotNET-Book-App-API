@@ -18,11 +18,11 @@ namespace Book_App_API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(List<ReaderAge>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAllAsync()
         {
             try
             {
-                List<ReaderAge> response = await _logic.GetReaderAges();
+                List<ReaderAge> response = await _logic.GetAllAsync();
                 return Ok(response);
             }
             catch (Exception)

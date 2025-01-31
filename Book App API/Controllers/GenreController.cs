@@ -8,21 +8,21 @@ namespace Book_App_API.Controllers
     [Route("[controller]")]
     public class GenreController : Controller
     {
-        private readonly GenreLogic _genreLogic;
+        private readonly GenreLogic _logic;
 
         public GenreController(GenreLogic genreLogic)
         {
-            _genreLogic = genreLogic;
+            _logic = genreLogic;
         }
 
-        [HttpGet(Name = "GetGenre")]
+        [HttpGet]
         [ProducesResponseType(typeof(List<Genre>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAllAsync()
         {
             try
             {
-                List<Genre> genres = await _genreLogic.GetGenres();
+                List<Genre> genres = await _logic.GetAllAsync();
                 return Ok(genres);
             }
             catch (Exception)

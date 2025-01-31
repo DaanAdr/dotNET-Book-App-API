@@ -13,7 +13,7 @@ namespace Book_App_API.Logic
             _dbLogic = databaseLogic;
         }
 
-        public async Task<List<Author>> GetAuthors()
+        public async Task<List<Author>> GetAllAsync()
         {
             try
             {
@@ -27,7 +27,7 @@ namespace Book_App_API.Logic
             }
         }
 
-        public async Task<Author> PostAuthor(AuthorPostDTO author)
+        public async Task<Author> PostAsync(AuthorPostDTO author)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace Book_App_API.Logic
             return newAuthor;
         }
 
-        public async Task<Author> PatchAuthor(string id, AuthorPatchDTO authorPatch)
+        public async Task<Author> PatchAsync(string id, AuthorPatchDTO authorPatch)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace Book_App_API.Logic
             }
         }
 
-        public async Task<bool> DeleteAuthor(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
             try
             {

@@ -12,7 +12,7 @@ namespace Book_App_API.Logic
             _dbLogic = databaseLogic;
         }
 
-        public async Task<List<ReaderAge>> GetReaderAges()
+        public async Task<List<ReaderAge>> GetAllAsync()
         {
             try
             {

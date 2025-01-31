@@ -9,21 +9,21 @@ namespace Book_App_API.Controllers
     [Route("[controller]")]
     public class AuthorController : Controller
     {
-        private readonly AuthorLogic _authorLogic;
+        private readonly AuthorLogic _logic;
 
         public AuthorController(AuthorLogic authorLogic)
         {
-            _authorLogic = authorLogic;
+            _logic = authorLogic;
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(List<Author>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAllAsync()
         {
             try
             {
-                List<Author> authors = await _authorLogic.GetAuthors();
+                List<Author> authors = await _logic.GetAllAsync();
                 return Ok(authors);
             }
             catch (Exception)
@@ -36,7 +36,7 @@ namespace Book_App_API.Controllers
         [ProducesResponseType(typeof(Author), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post([FromBody]AuthorPostDTO author)
+        public async Task<IActionResult> PostAsync([FromBody]AuthorPostDTO author)
         {
             // Automatic validation of the AuthorDTO based on data annotations
             if (!ModelState.IsValid)
@@ -47,9 +47,9 @@ namespace Book_App_API.Controllers
 
             try
             {
-                Author response = await _authorLogic.PostAuthor(author);
+                Author response = await _logic.PostAsync(author);
 
-                return Created(nameof(Post), response);
+                return Created(nameof(PostAsync), response);
             }
             catch (Exception)
             {
@@ -62,7 +62,7 @@ namespace Book_App_API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Patch(string id, [FromBody] AuthorPatchDTO author)
+        public async Task<IActionResult> PatchAsync(string id, [FromBody] AuthorPatchDTO author)
         {
             //Automatic validation of the AuthorDTO based on data annotations
             if (!ModelState.IsValid)
@@ -72,7 +72,7 @@ namespace Book_App_API.Controllers
 
             try
             {
-                Author response = await _authorLogic.PatchAuthor(id, author);
+                Author response = await _logic.PatchAsync(id, author);
 
                 return Ok(response);
             }
@@ -91,11 +91,11 @@ namespace Book_App_API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> DeleteAsync(string id)
         {
             try
             {
-                await _authorLogic.DeleteAuthor(id);
+                await _logic.DeleteAsync(id);
 
                 return Ok("Author deleted!");
             }

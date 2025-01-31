@@ -8,12 +8,12 @@ namespace Book_App_API.Logic
     {
         private readonly BookDatabaseLogic _dbLogic;
 
-        public BookLogic(BookDatabaseLogic bookDatabaseLogic)
+        public BookLogic(BookDatabaseLogic databaseLogic)
         {
-            _dbLogic = bookDatabaseLogic;
+            _dbLogic = databaseLogic;
         }
 
-        public async Task<List<BookGetDTO>> GetBook()
+        public async Task<List<BookGetDTO>> GetAllAsync()
         {
             try
             {

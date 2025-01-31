@@ -7,12 +7,12 @@ namespace Book_App_API.Logic
     {
         private readonly GenreDatabaseLogic _dbLogic;
 
-        public GenreLogic(GenreDatabaseLogic genreDatabaseLogic)
+        public GenreLogic(GenreDatabaseLogic databaseLogic)
         {
-            _dbLogic = genreDatabaseLogic;
+            _dbLogic = databaseLogic;
         }
 
-        public async Task<List<Genre>> GetGenres()
+        public async Task<List<Genre>> GetAllAsync()
         {
             try
             {

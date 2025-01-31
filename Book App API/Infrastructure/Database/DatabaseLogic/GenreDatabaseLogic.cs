@@ -7,9 +7,9 @@ namespace Book_App_API.Infrastructure.Database.Logic
     {
         private readonly AppDbContext _dbContext;
 
-        public GenreDatabaseLogic(AppDbContext dbContext)
+        public GenreDatabaseLogic(AppDbContext appDbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = appDbContext;
         }
 
         public async Task<List<Genre>> GetAllAsync()
