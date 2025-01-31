@@ -28,6 +28,15 @@ namespace Book_App_API.Infrastructure.Database
 
             //Seed readerAges
             modelBuilder.Entity<ReaderAge>().HasData(BooksSeedData.readerAgeSeedData);
+
+            //Seed book
+            modelBuilder.Entity<Book>().HasData(BooksSeedData.bookSeedData);
+
+            //Seed bookAuthor
+            modelBuilder.Entity<BookAuthor>().HasData(BooksSeedData.bookAuthorSeedData);
+
+            //Seed bookGenre
+            modelBuilder.Entity<BookGenre>().HasData(BooksSeedData.bookGenreSeedData);
         }
     }
 }

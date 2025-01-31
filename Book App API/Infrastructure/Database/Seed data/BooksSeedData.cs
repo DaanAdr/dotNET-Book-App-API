@@ -205,11 +205,19 @@ namespace Book_App_API.Infrastructure.Database.Seed_data
             },
             new Book
             {
-                Id = Guid.Parse(""),
-                Title = "",
-                Pages = ,
-                PublishDate = new DateTime(),
-                ReaderAgeId = Guid.Parse("")
+                Id = Guid.Parse("0787e8cb-bdd6-43b1-91ea-1c4b2237fab9"),
+                Title = "Nineteen Eighty-Four",
+                Pages = 328,
+                PublishDate = new DateTime(1949, 6, 8),
+                ReaderAgeId = Guid.Parse("729ca0c2-2b61-45e5-82c7-78b6680bdd31")
+            },
+            new Book
+            {
+                Id = Guid.Parse("f0a778ad-c4e1-4b25-b85a-93a104c88182"),
+                Title = "I, Robot",
+                Pages = 253,
+                PublishDate = new DateTime(1950, 12 ,2),
+                ReaderAgeId = Guid.Parse("729ca0c2-2b61-45e5-82c7-78b6680bdd31")
             }
         };
 
@@ -293,11 +301,19 @@ namespace Book_App_API.Infrastructure.Database.Seed_data
                 AuthorId = Guid.Parse("fbbb4392-3c14-4625-9449-fa7e19fdf565"),
                 BookId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
             },
+            //1984
             new BookAuthor
             {
-                Id = Guid.Parse(""),
-                AuthorId = Guid.Parse(""),
-                BookId = Guid.Parse("")
+                Id = Guid.Parse("9a3c0b15-0da5-4467-b934-7a59b66eeccb"),
+                AuthorId = Guid.Parse("82b4c82e-23ff-4fbd-b9c4-1220990dafd4"),
+                BookId = Guid.Parse("0787e8cb-bdd6-43b1-91ea-1c4b2237fab9")
+            },
+            //I, Robot
+            new BookAuthor
+            {
+                Id = Guid.Parse("466e4a05-0e7c-4922-8356-77ae89aa4696"),
+                AuthorId = Guid.Parse("cc4ce597-ae78-4180-a1ed-68dd94b7566d"),
+                BookId = Guid.Parse("f0a778ad-c4e1-4b25-b85a-93a104c88182")
             }
         };
 
@@ -381,11 +397,25 @@ namespace Book_App_API.Infrastructure.Database.Seed_data
                 GenreId = Guid.Parse("7369fec7-9646-42b4-8266-bfce860e7ead"),
                 BookId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
             },
+            //1984
             new BookGenre
             {
-                Id = Guid.Parse(""),
-                GenreId = Guid.Parse(""),
-                BookId = Guid.Parse("")
+                Id = Guid.Parse("9a01e76b-102c-464c-a8d8-6435c5bda08f"),
+                GenreId = Guid.Parse("7369fec7-9646-42b4-8266-bfce860e7ead"),
+                BookId = Guid.Parse("0787e8cb-bdd6-43b1-91ea-1c4b2237fab9")
+            },
+            new BookGenre
+            {
+                Id = Guid.Parse("cab052f4-1ecb-4c01-a086-50a213e5f065"),
+                GenreId = Guid.Parse("57a1d08a-39f7-4cdb-85e0-20811f714bcb"),
+                BookId = Guid.Parse("0787e8cb-bdd6-43b1-91ea-1c4b2237fab9")
+            },
+            //I, Robot
+            new BookGenre
+            {
+                Id = Guid.Parse("af97b263-1dc0-45a8-b462-94c94ae223ca"),
+                GenreId = Guid.Parse("7369fec7-9646-42b4-8266-bfce860e7ead"),
+                BookId = Guid.Parse("f0a778ad-c4e1-4b25-b85a-93a104c88182")
             }
         };
     }
