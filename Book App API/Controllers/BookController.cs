@@ -1,4 +1,5 @@
-﻿using Book_App_API.Domain.Entity;
+﻿using Book_App_API.Domain.DTO;
+using Book_App_API.Domain.Entity;
 using Book_App_API.Logic;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +23,7 @@ namespace Book_App_API.Controllers
         {
             try
             {
-                List<Book> genres = await _logic.GetBook();
+                List<BookGetDTO> genres = await _logic.GetBook();
                 return Ok(genres);
             }
             catch (Exception)
