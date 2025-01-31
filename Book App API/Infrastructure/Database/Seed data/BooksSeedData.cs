@@ -152,5 +152,241 @@ namespace Book_App_API.Infrastructure.Database.Seed_data
                     AgeRange = "Adult (Ages 18+)"
                 }
             };
+
+        public static readonly List<Book> bookSeedData = new List<Book>()
+        {
+            new Book
+            {
+                Id = Guid.Parse("7f286225-210d-4f5a-b34e-b272a642f285"),
+                Title = "Tunnels",
+                Pages = 464,
+                PublishDate = new DateTime(2007, 7, 2),
+                ReaderAgeId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
+            },
+            new Book
+            {
+                Id = Guid.Parse("7b05a2f6-6606-4d6a-ba67-759097a75ed1"),
+                Title = "Deeper",
+                Pages = 655,
+                PublishDate = new DateTime(2009, 4, 1),
+                ReaderAgeId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
+            },
+            new Book
+            {
+                Id = Guid.Parse("50dc71f8-2738-484f-a6cc-c1615e203517"),
+                Title = "Freefall",
+                Pages = 577,
+                PublishDate = new DateTime(2009, 5, 18),
+                ReaderAgeId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
+            },
+            new Book
+            {
+                Id = Guid.Parse("29700f2e-bfb5-4441-9497-517ae383c403"),
+                Title = "Closer",
+                Pages = 508,
+                PublishDate = new DateTime(2010, 5, 3),
+                ReaderAgeId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
+            },
+            new Book
+            {
+                Id = Guid.Parse("2a8579aa-8a88-468f-92f0-feda72a621ef"),
+                Title = "Spiral",
+                Pages = 443,
+                PublishDate = new DateTime(2011, 9, 1),
+                ReaderAgeId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
+            },
+            new Book
+            {
+                Id = Guid.Parse("a60c9e93-ed11-42da-933b-2a866171ee9a"),
+                Title = "Terminal",
+                Pages = 402,
+                PublishDate = new DateTime(2013, 5, 2),
+                ReaderAgeId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
+            },
+            new Book
+            {
+                Id = Guid.Parse(""),
+                Title = "",
+                Pages = ,
+                PublishDate = new DateTime(),
+                ReaderAgeId = Guid.Parse("")
+            }
+        };
+
+        public static readonly List<BookAuthor> bookAuthorSeedData = new List<BookAuthor>()
+        {
+            //Tunnels
+            new BookAuthor
+            {
+                Id = Guid.Parse("f7d0dc28-f16c-4dd6-9322-dbdafafa967d"),
+                AuthorId = Guid.Parse("0f14ebe0-ae44-49ae-b412-796d8ed108a8"),
+                BookId = Guid.Parse("7f286225-210d-4f5a-b34e-b272a642f285")
+            },
+            new BookAuthor
+            {
+                Id = Guid.Parse("fdafe8de-64eb-4567-806d-b15cdab4289b"),
+                AuthorId = Guid.Parse("fbbb4392-3c14-4625-9449-fa7e19fdf565"),
+                BookId = Guid.Parse("7f286225-210d-4f5a-b34e-b272a642f285")
+            },
+            //Deeper
+            new BookAuthor
+            {
+                Id = Guid.Parse("5f35c608-b3fe-4d7e-bc39-ae18103bd52a"),
+                AuthorId = Guid.Parse("0f14ebe0-ae44-49ae-b412-796d8ed108a8"),
+                BookId = Guid.Parse("7b05a2f6-6606-4d6a-ba67-759097a75ed1")
+            },
+            new BookAuthor
+            {
+                Id = Guid.Parse("5159bc11-ea6f-41d4-a6cb-6a87ae04da48"),
+                AuthorId = Guid.Parse("fbbb4392-3c14-4625-9449-fa7e19fdf565"),
+                BookId = Guid.Parse("7b05a2f6-6606-4d6a-ba67-759097a75ed1")
+            },
+            //Freefall
+            new BookAuthor
+            {
+                Id = Guid.Parse("f8c7e27d-7f68-4907-9094-fdb8385be436"),
+                AuthorId = Guid.Parse("0f14ebe0-ae44-49ae-b412-796d8ed108a8"),
+                BookId = Guid.Parse("50dc71f8-2738-484f-a6cc-c1615e203517")
+            },
+            new BookAuthor
+            {
+                Id = Guid.Parse("0f69155e-9481-47b1-8ebd-8ddc97260c32"),
+                AuthorId = Guid.Parse("fbbb4392-3c14-4625-9449-fa7e19fdf565"),
+                BookId = Guid.Parse("50dc71f8-2738-484f-a6cc-c1615e203517")
+            },
+            //Closer
+            new BookAuthor
+            {
+                Id = Guid.Parse("d9bdbc7f-9e4f-4fce-8e61-ebfbd537fdbc"),
+                AuthorId = Guid.Parse("0f14ebe0-ae44-49ae-b412-796d8ed108a8"),
+                BookId = Guid.Parse("29700f2e-bfb5-4441-9497-517ae383c403")
+            },
+            new BookAuthor
+            {
+                Id = Guid.Parse("6c0d69a1-bcc7-48aa-98d1-ad0fa42c6eed"),
+                AuthorId = Guid.Parse("fbbb4392-3c14-4625-9449-fa7e19fdf565"),
+                BookId = Guid.Parse("29700f2e-bfb5-4441-9497-517ae383c403")
+            },
+            //Spiral
+            new BookAuthor
+            {
+                Id = Guid.Parse("2dc89b14-dacc-43be-85cc-184eaca40f68"),
+                AuthorId = Guid.Parse("0f14ebe0-ae44-49ae-b412-796d8ed108a8"),
+                BookId = Guid.Parse("2a8579aa-8a88-468f-92f0-feda72a621ef")
+            },
+            new BookAuthor
+            {
+                Id = Guid.Parse("bd50453c-74f1-4914-90a9-a66c6aa241e6"),
+                AuthorId = Guid.Parse("fbbb4392-3c14-4625-9449-fa7e19fdf565"),
+                BookId = Guid.Parse("2a8579aa-8a88-468f-92f0-feda72a621ef")
+            },
+            //Terminal
+            new BookAuthor
+            {
+                Id = Guid.Parse("1902008b-e2ea-463f-bdbb-fafc0257a12c"),
+                AuthorId = Guid.Parse("0f14ebe0-ae44-49ae-b412-796d8ed108a8"),
+                BookId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
+            },
+            new BookAuthor
+            {
+                Id = Guid.Parse("97c64e37-307d-40ab-9668-924c18f669d3"),
+                AuthorId = Guid.Parse("fbbb4392-3c14-4625-9449-fa7e19fdf565"),
+                BookId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
+            },
+            new BookAuthor
+            {
+                Id = Guid.Parse(""),
+                AuthorId = Guid.Parse(""),
+                BookId = Guid.Parse("")
+            }
+        };
+
+        public static readonly List<BookGenre> bookGenreSeedData = new List<BookGenre>()
+        {
+            //Tunnels
+            new BookGenre
+            {
+                Id = Guid.Parse("059a8bce-3ebe-41dc-97fb-3ebabab72f58"),
+                GenreId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
+                BookId = Guid.Parse("7f286225-210d-4f5a-b34e-b272a642f285")
+            },
+            new BookGenre
+            {
+                Id = Guid.Parse("d1788eac-54ea-4e46-bd94-d4837df891b2"),
+                GenreId = Guid.Parse("7369fec7-9646-42b4-8266-bfce860e7ead"),
+                BookId = Guid.Parse("7f286225-210d-4f5a-b34e-b272a642f285")
+            },
+            //Deeper
+            new BookGenre
+            {
+                Id = Guid.Parse("de7c3a6d-24fc-4f17-8278-1b486c954a9e"),
+                GenreId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
+                BookId = Guid.Parse("7b05a2f6-6606-4d6a-ba67-759097a75ed1")
+            },
+            new BookGenre
+            {
+                Id = Guid.Parse("e300d359-efd8-4bf3-97cd-eb796b26630c"),
+                GenreId = Guid.Parse("7369fec7-9646-42b4-8266-bfce860e7ead"),
+                BookId = Guid.Parse("7b05a2f6-6606-4d6a-ba67-759097a75ed1")
+            },
+            //Freefall
+            new BookGenre
+            {
+                Id = Guid.Parse("2722c800-811c-40f0-a51f-5d398bbabf18"),
+                GenreId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
+                BookId = Guid.Parse("50dc71f8-2738-484f-a6cc-c1615e203517")
+            },
+            new BookGenre
+            {
+                Id = Guid.Parse("ec0c213a-0fff-4f55-a0c4-76cf364e4e89"),
+                GenreId = Guid.Parse("7369fec7-9646-42b4-8266-bfce860e7ead"),
+                BookId = Guid.Parse("50dc71f8-2738-484f-a6cc-c1615e203517")
+            },
+            //Closer
+            new BookGenre
+            {
+                Id = Guid.Parse("65e6179b-ffe8-44c7-ae55-0f436c9c880e"),
+                GenreId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
+                BookId = Guid.Parse("29700f2e-bfb5-4441-9497-517ae383c403")
+            },
+            new BookGenre
+            {
+                Id = Guid.Parse("4bd61133-f76b-49c9-9502-b31a68ccc237"),
+                GenreId = Guid.Parse("7369fec7-9646-42b4-8266-bfce860e7ead"),
+                BookId = Guid.Parse("29700f2e-bfb5-4441-9497-517ae383c403")
+            },
+            //Spiral
+            new BookGenre
+            {
+                Id = Guid.Parse("57dff9b8-204a-48d7-8457-0ecbddd379cb"),
+                GenreId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
+                BookId = Guid.Parse("2a8579aa-8a88-468f-92f0-feda72a621ef")
+            },
+            new BookGenre
+            {
+                Id = Guid.Parse("77628f88-67a8-4b7a-af07-dd8b1b709f76"),
+                GenreId = Guid.Parse("7369fec7-9646-42b4-8266-bfce860e7ead"),
+                BookId = Guid.Parse("2a8579aa-8a88-468f-92f0-feda72a621ef")
+            },
+            //Terminal
+            new BookGenre
+            {
+                Id = Guid.Parse("bddbd5ee-4506-40f1-a3a1-7e7f7fc0c5f2"),
+                GenreId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
+                BookId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
+            },
+            new BookGenre
+            {
+                Id = Guid.Parse("0e1acd54-aac7-415a-8a23-f088d87c9094"),
+                GenreId = Guid.Parse("7369fec7-9646-42b4-8266-bfce860e7ead"),
+                BookId = Guid.Parse("e4a6087f-f8c0-473e-8abe-2abeba324833")
+            },
+            new BookGenre
+            {
+                Id = Guid.Parse(""),
+                GenreId = Guid.Parse(""),
+                BookId = Guid.Parse("")
+            }
+        };
     }
 }
