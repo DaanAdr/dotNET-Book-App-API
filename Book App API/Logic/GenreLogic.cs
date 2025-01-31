@@ -16,7 +16,7 @@ namespace Book_App_API.Logic
         {
             try
             {
-                return await _dbLogic.GetGenres();
+                return await _dbLogic.GetAllAsync();
             }
             catch (Exception)
             {

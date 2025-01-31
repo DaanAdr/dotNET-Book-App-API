@@ -12,25 +12,25 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
             _dbContext = appDbContext;
         }
 
-        public async Task<List<Author>> GetAuthors()
+        public async Task<List<Author>> GetAllAsync()
         {
             return await _dbContext.Author.AsNoTracking().ToListAsync();
         }
 
-        private async Task<Author?> GetAuthorByName(Author author)
+        private async Task<Author?> GetByNameAsync(Author author)
         {
             return await _dbContext.Author.FirstOrDefaultAsync(a => a.Firstname == author.Firstname && a.Surname == a.Surname);
         }
 
-        public async Task<Author?> GetAuthorById(Guid id)
+        public async Task<Author?> GetByIdAsync(Guid id)
         {
             return await _dbContext.Author.FindAsync(id);
         }
 
-        public async Task<Author> PostAuthor(Author author)
+        public async Task<Author> PostAsync(Author author)
         {
             //Check if author already exists
-            Author? foundAuthor = await GetAuthorByName(author);
+            Author? foundAuthor = await GetByNameAsync(author);
 
             //Return found author
             if (foundAuthor != null)
@@ -44,16 +44,16 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
             return author;
         }
 
-        public async Task<Author> SavePatchedAuthor(Author author)
+        public async Task<Author> PatchAsync(Author author)
         {
             _dbContext.Author.Update(author);
             await _dbContext.SaveChangesAsync();
             return author;
         }
 
-        public async Task<bool> DeleteAuthor(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            Author? author = await GetAuthorById(id);
+            Author? author = await GetByIdAsync(id);
 
             if (author != null) 
             {

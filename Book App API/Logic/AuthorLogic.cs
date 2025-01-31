@@ -17,7 +17,7 @@ namespace Book_App_API.Logic
         {
             try
             {
-                return await _dbLogic.GetAuthors();
+                return await _dbLogic.GetAllAsync();
             }
             catch (Exception)
             {
@@ -33,7 +33,7 @@ namespace Book_App_API.Logic
             {
                 Author newAuthor = ConvertPostDtoToEntity(author);
 
-                return await _dbLogic.PostAuthor(newAuthor);
+                return await _dbLogic.PostAsync(newAuthor);
             }
             catch (Exception)
             {
@@ -59,7 +59,7 @@ namespace Book_App_API.Logic
             try
             {
                 //Find author at ID
-                Author? author = await _dbLogic.GetAuthorById(Guid.Parse(id));
+                Author? author = await _dbLogic.GetByIdAsync(Guid.Parse(id));
 
                 //If no author found, return error
                 if (author == null)
@@ -71,7 +71,7 @@ namespace Book_App_API.Logic
                 ApplyPatchData(author, authorPatch);
 
                 //Save patch data to database
-                return await _dbLogic.SavePatchedAuthor(author);
+                return await _dbLogic.PatchAsync(author);
             }
             catch (Exception)
             {
@@ -105,7 +105,7 @@ namespace Book_App_API.Logic
         {
             try
             {
-                return await _dbLogic.DeleteAuthor(Guid.Parse(id));
+                return await _dbLogic.DeleteAsync(Guid.Parse(id));
             }
             catch (Exception)
             {

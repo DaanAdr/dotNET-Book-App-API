@@ -17,7 +17,7 @@ namespace Book_App_API.Logic
         {
             try
             {
-                List<Book> unmappedBooks = await _dbLogic.GetBook();
+                List<Book> unmappedBooks = await _dbLogic.GetAllAsync();
 
                 return MapBookToGetDTO(unmappedBooks);
             }

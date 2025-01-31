@@ -12,7 +12,7 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
             _dbContext = appDbContext;
         }
 
-        public async Task<List<Book>> GetBook()
+        public async Task<List<Book>> GetAllAsync()
         {
             return await _dbContext.Books.AsNoTracking()
                 //Include the readerAge
