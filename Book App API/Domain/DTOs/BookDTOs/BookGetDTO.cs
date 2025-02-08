@@ -1,4 +1,4 @@
-﻿namespace Book_App_API.Domain.DTO
+﻿namespace Book_App_API.Domain.DTOs.BookDTOs
 {
     public class BookGetDTO
     {

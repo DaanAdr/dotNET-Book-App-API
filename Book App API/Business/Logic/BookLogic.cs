@@ -1,9 +1,9 @@
-﻿using Book_App_API.Domain.DTO;
+﻿using Book_App_API.Domain.DTOs.BookDTOs;
 using Book_App_API.Domain.Entity;
 using Book_App_API.Infrastructure.Database.Interfaces;
 using Book_App_API.Logic.Interfaces;
 
-namespace Book_App_API.Logic
+namespace Book_App_API.Business.Logic
 {
     public class BookLogic : IBookLogic
     {
@@ -32,14 +32,14 @@ namespace Book_App_API.Logic
 
         private List<BookGetDTO> MapBookToGetDTO(List<Book> books)
         {
-            List<BookGetDTO> mappedBooks = new List<BookGetDTO>();  
+            List<BookGetDTO> mappedBooks = new List<BookGetDTO>();
 
             foreach (Book book in books)
             {
                 //Create list of authors
                 List<string> authors = new List<string>();
 
-                foreach(BookAuthor author in book.BookAuthors)
+                foreach (BookAuthor author in book.BookAuthors)
                 {
                     string authorName = $"{author.Author.Firstname} {author.Author.Surname}";
                     authors.Add(authorName);
@@ -48,7 +48,7 @@ namespace Book_App_API.Logic
                 //Create list of genres
                 List<string> genres = new List<string>();
 
-                foreach(BookGenre genre in book.BookGenres)
+                foreach (BookGenre genre in book.BookGenres)
                 {
                     genres.Add(genre.Genre.GenreName);
                 }

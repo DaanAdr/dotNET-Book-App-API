@@ -1,5 +1,4 @@
 ﻿using Book_App_API.Domain.Entity;
-using Book_App_API.Infrastructure.Database.Seed_data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_App_API.Infrastructure.Database
@@ -20,24 +19,6 @@ namespace Book_App_API.Infrastructure.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Seed genre
-            modelBuilder.Entity<Genre>().HasData(BooksSeedData.genreSeedData);
-
-            //Seed author
-            modelBuilder.Entity<Author>().HasData(BooksSeedData.authorSeedData);
-
-            //Seed readerAges
-            modelBuilder.Entity<ReaderAge>().HasData(BooksSeedData.readerAgeSeedData);
-
-            //Seed book
-            modelBuilder.Entity<Book>().HasData(BooksSeedData.bookSeedData);
-
-            //Seed bookAuthor
-            modelBuilder.Entity<BookAuthor>().HasData(BooksSeedData.bookAuthorSeedData);
-
-            //Seed bookGenre
-            modelBuilder.Entity<BookGenre>().HasData(BooksSeedData.bookGenreSeedData);
-
             //Junction table relation for bookAuthors
             modelBuilder.Entity<BookAuthor>().HasKey(ba => new {ba.AuthorId, ba.BookId});
 

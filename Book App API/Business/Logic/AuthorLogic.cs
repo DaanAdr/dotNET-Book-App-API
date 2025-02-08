@@ -3,7 +3,7 @@ using Book_App_API.Domain.Entity;
 using Book_App_API.Infrastructure.Database.Interfaces;
 using Book_App_API.Logic.Interfaces;
 
-namespace Book_App_API.Logic
+namespace Book_App_API.Business.Logic
 {
     public class AuthorLogic : IAuthorLogic
     {
@@ -69,8 +69,8 @@ namespace Book_App_API.Logic
             }
         }
 
-        private Author ConvertPostDtoToEntity(AuthorPostDTO author) 
-        { 
+        private Author ConvertPostDtoToEntity(AuthorPostDTO author)
+        {
             Author newAuthor = new Author()
             {
                 Firstname = author.Firstname,
@@ -115,13 +115,13 @@ namespace Book_App_API.Logic
         private void ApplyPatchData(Author author, AuthorPatchDTO authorPatch)
         {
             //Patch firstname if necessary
-            if(authorPatch.Firstname != null)
+            if (authorPatch.Firstname != null)
             {
                 author.Firstname = authorPatch.Firstname;
             }
 
             //Patch surname if necessary
-            if(authorPatch.Surname != null)
+            if (authorPatch.Surname != null)
             {
                 author.Surname = authorPatch.Surname;
             }

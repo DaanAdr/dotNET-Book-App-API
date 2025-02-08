@@ -3,7 +3,7 @@ using Book_App_API.Domain.Entity;
 using Book_App_API.Infrastructure.Database.Interfaces;
 using Book_App_API.Logic.Interfaces;
 
-namespace Book_App_API.Logic
+namespace Book_App_API.Business.Logic
 {
     public class ReaderAgeLogic : IReaderAgeLogic
     {

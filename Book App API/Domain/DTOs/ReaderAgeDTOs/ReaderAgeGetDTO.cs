@@ -1,4 +1,4 @@
-﻿namespace Book_App_API.Domain.DTOs
+﻿namespace Book_App_API.Domain.DTOs.ReaderAgeDTOs
 {
     public class ReaderAgeGetDTO
     {

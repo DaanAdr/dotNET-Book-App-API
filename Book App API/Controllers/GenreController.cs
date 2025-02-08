@@ -1,4 +1,4 @@
-﻿using Book_App_API.Domain.DTOs;
+﻿using Book_App_API.Domain.DTOs.GenreDTOs;
 using Book_App_API.Domain.Entity;
 using Book_App_API.Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
