@@ -1,4 +1,5 @@
-﻿using Book_App_API.Domain.Entity;
+﻿using Book_App_API.Domain.DTOs;
+using Book_App_API.Domain.Entity;
 using Book_App_API.Infrastructure.Database.Interfaces;
 using Book_App_API.Logic.Interfaces;
 
@@ -13,11 +14,13 @@ namespace Book_App_API.Logic
             _dbLogic = databaseLogic;
         }
 
-        public async Task<List<ReaderAge>> GetAllAsync()
+        public async Task<List<ReaderAgeGetDTO>> GetAllAsync()
         {
             try
             {
-                return await _dbLogic.GetAllAsync();
+                List<ReaderAge> readerAges = await _dbLogic.GetAllAsync();
+                List<ReaderAgeGetDTO> dtos = ConvertAllToDTO(readerAges);
+                return dtos;
             }
             catch (Exception)
             {
@@ -25,6 +28,28 @@ namespace Book_App_API.Logic
 
                 throw;
             }
+        }
+
+        private ReaderAgeGetDTO ConvertToDTO(ReaderAge readerAge)
+        {
+            return new ReaderAgeGetDTO
+            {
+                Id = readerAge.Id,
+                AgeRange = readerAge.AgeRange,
+            };
+        }
+
+        private List<ReaderAgeGetDTO> ConvertAllToDTO(List<ReaderAge> readerAges)
+        {
+            List<ReaderAgeGetDTO> dtos = new List<ReaderAgeGetDTO>();
+
+            foreach (ReaderAge readerAge in readerAges)
+            {
+                ReaderAgeGetDTO dto = ConvertToDTO(readerAge);
+                dtos.Add(dto);
+            }
+
+            return dtos;
         }
     }
 }

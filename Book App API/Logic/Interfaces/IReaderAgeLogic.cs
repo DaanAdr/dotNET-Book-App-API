@@ -1,9 +1,9 @@
-﻿using Book_App_API.Domain.Entity;
+﻿using Book_App_API.Domain.DTOs;
 
 namespace Book_App_API.Logic.Interfaces
 {
     public interface IReaderAgeLogic
     {
-        Task<List<ReaderAge>> GetAllAsync();
+        Task<List<ReaderAgeGetDTO>> GetAllAsync();
     }
 }
