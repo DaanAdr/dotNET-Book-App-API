@@ -1,7 +1,9 @@
 using Book_App_API.Infrastructure.Database;
 using Book_App_API.Infrastructure.Database.DatabaseLogic;
+using Book_App_API.Infrastructure.Database.Interfaces;
 using Book_App_API.Infrastructure.Database.Logic;
 using Book_App_API.Logic;
+using Book_App_API.Logic.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,8 +23,8 @@ builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
 builder.Services.AddScoped<GenreDatabaseLogic>();
 builder.Services.AddScoped<GenreLogic>();
 
-builder.Services.AddScoped<AuthorDatabaseLogic>();
-builder.Services.AddScoped<AuthorLogic>();
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IAuthorLogic, AuthorLogic>();
 
 builder.Services.AddScoped<ReaderAgeDatabaseLogic>();
 builder.Services.AddScoped<ReaderAgeLogic>();
