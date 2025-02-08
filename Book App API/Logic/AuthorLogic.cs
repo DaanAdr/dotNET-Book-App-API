@@ -1,4 +1,4 @@
-﻿using Book_App_API.Domain.DTO;
+﻿using Book_App_API.Domain.DTOs.AuthorDTOs;
 using Book_App_API.Domain.Entity;
 using Book_App_API.Infrastructure.Database.Interfaces;
 using Book_App_API.Logic.Interfaces;
@@ -14,11 +14,13 @@ namespace Book_App_API.Logic
             _dbLogic = databaseLogic;
         }
 
-        public async Task<List<Author>> GetAllAsync()
+        public async Task<List<AuthorGetDTO>> GetAllAsync()
         {
             try
             {
-                return await _dbLogic.GetAllAsync();
+                List<Author> authors = await _dbLogic.GetAllAsync();
+                List<AuthorGetDTO> dtos = ConvertAllToGetDTO(authors);
+                return dtos;
             }
             catch (Exception)
             {
@@ -26,6 +28,29 @@ namespace Book_App_API.Logic
 
                 throw;
             }
+        }
+
+        private AuthorGetDTO ConvertToGetDTO(Author author)
+        {
+            return new AuthorGetDTO
+            {
+                Id = author.Id,
+                Firstname = author.Firstname,
+                Surname = author.Surname,
+            };
+        }
+
+        private List<AuthorGetDTO> ConvertAllToGetDTO(List<Author> authors)
+        {
+            List<AuthorGetDTO> dtos = new List<AuthorGetDTO>();
+
+            foreach (Author author in authors)
+            {
+                AuthorGetDTO dto = ConvertToGetDTO(author);
+                dtos.Add(dto);
+            }
+
+            return dtos;
         }
 
         public async Task<Author> PostAsync(AuthorPostDTO author)

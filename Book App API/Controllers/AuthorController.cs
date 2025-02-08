@@ -1,4 +1,4 @@
-﻿using Book_App_API.Domain.DTO;
+﻿using Book_App_API.Domain.DTOs.AuthorDTOs;
 using Book_App_API.Domain.Entity;
 using Book_App_API.Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +23,7 @@ namespace Book_App_API.Controllers
         {
             try
             {
-                List<Author> authors = await _logic.GetAllAsync();
+                List<AuthorGetDTO> authors = await _logic.GetAllAsync();
                 return Ok(authors);
             }
             catch (Exception)

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Book_App_API.Domain.DTO
+namespace Book_App_API.Domain.DTOs.AuthorDTOs
 {
     public class AuthorPatchDTO
     {
