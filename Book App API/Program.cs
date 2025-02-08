@@ -26,8 +26,8 @@ builder.Services.AddScoped<IGenreLogic, GenreLogic>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IAuthorLogic, AuthorLogic>();
 
-builder.Services.AddScoped<ReaderAgeDatabaseLogic>();
-builder.Services.AddScoped<ReaderAgeLogic>();
+builder.Services.AddScoped<IReaderAgeRepository, ReaderAgeRepository>();
+builder.Services.AddScoped<IReaderAgeLogic, ReaderAgeLogic>();
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBookLogic, BookLogic>();
