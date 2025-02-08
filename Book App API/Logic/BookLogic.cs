@@ -1,14 +1,15 @@
 ﻿using Book_App_API.Domain.DTO;
 using Book_App_API.Domain.Entity;
-using Book_App_API.Infrastructure.Database.DatabaseLogic;
+using Book_App_API.Infrastructure.Database.Interfaces;
+using Book_App_API.Logic.Interfaces;
 
 namespace Book_App_API.Logic
 {
-    public class BookLogic
+    public class BookLogic : IBookLogic
     {
-        private readonly BookDatabaseLogic _dbLogic;
+        private readonly IBookRepository _dbLogic;
 
-        public BookLogic(BookDatabaseLogic databaseLogic)
+        public BookLogic(IBookRepository databaseLogic)
         {
             _dbLogic = databaseLogic;
         }

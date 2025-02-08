@@ -1,13 +1,14 @@
 ﻿using Book_App_API.Domain.Entity;
+using Book_App_API.Infrastructure.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_App_API.Infrastructure.Database.DatabaseLogic
 {
-    public class BookDatabaseLogic
+    public class BookRepository : IBookRepository
     {
         private readonly AppDbContext _dbContext;
 
-        public BookDatabaseLogic(AppDbContext appDbContext)
+        public BookRepository(AppDbContext appDbContext)
         {
             _dbContext = appDbContext;
         }

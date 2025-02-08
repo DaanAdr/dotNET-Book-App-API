@@ -29,8 +29,8 @@ builder.Services.AddScoped<IAuthorLogic, AuthorLogic>();
 builder.Services.AddScoped<ReaderAgeDatabaseLogic>();
 builder.Services.AddScoped<ReaderAgeLogic>();
 
-builder.Services.AddScoped<BookDatabaseLogic>();
-builder.Services.AddScoped<BookLogic>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IBookLogic, BookLogic>();
 
 var app = builder.Build();
 
