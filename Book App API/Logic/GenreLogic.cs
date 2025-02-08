@@ -1,9 +1,11 @@
-﻿using Book_App_API.Domain.Entity;
+﻿using Book_App_API.Domain.DTOs;
+using Book_App_API.Domain.Entity;
 using Book_App_API.Infrastructure.Database.Interfaces;
+using Book_App_API.Logic.Interfaces;
 
 namespace Book_App_API.Logic
 {
-    public class GenreLogic : IGenreRepository
+    public class GenreLogic : IGenreLogic
     {
         private readonly IGenreRepository _dbLogic;
 
@@ -12,11 +14,13 @@ namespace Book_App_API.Logic
             _dbLogic = databaseLogic;
         }
 
-        public async Task<List<Genre>> GetAllAsync()
+        public async Task<List<GenreGetDTO>> GetAllAsync()
         {
             try
             {
-                return await _dbLogic.GetAllAsync();
+                List<Genre> genres = await _dbLogic.GetAllAsync();
+                List<GenreGetDTO> dtos = ConvertAllToDTO(genres);
+                return dtos;
             }
             catch (Exception)
             {
@@ -24,6 +28,28 @@ namespace Book_App_API.Logic
 
                 throw;
             }
+        }
+
+        private GenreGetDTO ConvertToDTO(Genre genre)
+        {
+            return new GenreGetDTO
+            {
+                Id = genre.Id,
+                GenreName = genre.GenreName,
+            };
+        }
+
+        private List<GenreGetDTO> ConvertAllToDTO(List<Genre> genres)
+        {
+            List<GenreGetDTO> dtos = new List<GenreGetDTO>();
+
+            foreach (Genre genre in genres)
+            {
+                GenreGetDTO dto = ConvertToDTO(genre);
+                dtos.Add(dto);
+            }
+
+            return dtos;
         }
     }
 }

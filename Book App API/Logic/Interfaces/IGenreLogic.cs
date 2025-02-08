@@ -1,7 +1,9 @@
-﻿namespace Book_App_API.Logic.Interfaces
+﻿using Book_App_API.Domain.DTOs;
+
+namespace Book_App_API.Logic.Interfaces
 {
     public interface IGenreLogic
     {
-        Task<List<Genre>> GetAllAsync()
+        Task<List<GenreGetDTO>> GetAllAsync();
     }
 }
