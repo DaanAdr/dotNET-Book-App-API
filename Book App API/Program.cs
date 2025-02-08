@@ -20,8 +20,8 @@ builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
     optionsBuilder.UseSqlServer(builder.Configuration["DBConnectionString"]!);
 });
 
-builder.Services.AddScoped<GenreDatabaseLogic>();
-builder.Services.AddScoped<GenreLogic>();
+builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<IGenreLogic, GenreLogic>();
 
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IAuthorLogic, AuthorLogic>();
