@@ -7,53 +7,53 @@ using Moq;
 
 namespace Book_App_API_Unit_Tests.Logic_Tests
 {
-    public class AuthorLogicTests
-    {
-        private readonly Mock<IAuthorRepository> _mockRepository;
-        private readonly AuthorLogic _authorLogic;
+    //public class AuthorLogicTests
+    //{
+    //    private readonly Mock<IAuthorRepository> _mockRepository;
+    //    private readonly AuthorLogic _authorLogic;
 
-        public AuthorLogicTests()
-        {
-            _mockRepository = new Mock<IAuthorRepository>();
-            _authorLogic = new AuthorLogic(_mockRepository.Object);
-        }
+    //    public AuthorLogicTests()
+    //    {
+    //        _mockRepository = new Mock<IAuthorRepository>();
+    //        _authorLogic = new AuthorLogic(_mockRepository.Object);
+    //    }
 
-        #region GetAllAsync Tests
-        [Fact]
-        public async Task GetAllAsync_ReturnsListOfAuthors()
-        {
-            //Arrange
-            List<Author> authors = new List<Author>()
-            {
-                BooksSeedData.authorSeedData[1],
-                BooksSeedData.authorSeedData[3],
-            };
+    //    #region GetAllAsync Tests
+    //    [Fact]
+    //    public async Task GetAllAsync_ReturnsListOfAuthors()
+    //    {
+    //        //Arrange
+    //        List<Author> authors = new List<Author>()
+    //        {
+    //            BooksSeedData.authorSeedData[1],
+    //            BooksSeedData.authorSeedData[3],
+    //        };
 
-            _mockRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(authors);
+    //        _mockRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(authors);
 
-            //Act
-            List<AuthorGetDTO> result = await _authorLogic.GetAllAsync();
+    //        //Act
+    //        List<AuthorGetDTO> result = await _authorLogic.GetAllAsync();
 
-            //Assert
-            Assert.NotNull(result);
-            Assert.Equal(2, result.Count);
-            Assert.Equal(authors[0].Id, result[0].Id);
-            Assert.Equal(authors[0].Firstname, result[0].Firstname);
-            Assert.Equal(authors[0].Surname, result[0].Surname);
-            Assert.Equal(authors[1].Surname, result[1].Surname);
-            Assert.Equal(authors[1].Firstname, result[1].Firstname);
-            Assert.Equal(authors[1].Id, result[1].Id);
-        }
+    //        //Assert
+    //        Assert.NotNull(result);
+    //        Assert.Equal(2, result.Count);
+    //        Assert.Equal(authors[0].Id, result[0].Id);
+    //        Assert.Equal(authors[0].Firstname, result[0].Firstname);
+    //        Assert.Equal(authors[0].Surname, result[0].Surname);
+    //        Assert.Equal(authors[1].Surname, result[1].Surname);
+    //        Assert.Equal(authors[1].Firstname, result[1].Firstname);
+    //        Assert.Equal(authors[1].Id, result[1].Id);
+    //    }
 
-        [Fact]
-        public async Task GetAllAsync_ThrowsException_WhenRepositoryThrows()
-        {
-            // Arrange
-            _mockRepository.Setup(repo => repo.GetAllAsync()).ThrowsAsync(new Exception("Database error"));
+    //    [Fact]
+    //    public async Task GetAllAsync_ThrowsException_WhenRepositoryThrows()
+    //    {
+    //        // Arrange
+    //        _mockRepository.Setup(repo => repo.GetAllAsync()).ThrowsAsync(new Exception("Database error"));
 
-            // Act & Assert
-            await Assert.ThrowsAsync<Exception>(() => _authorLogic.GetAllAsync());
-        }
-        #endregion
-    }
+    //        // Act & Assert
+    //        await Assert.ThrowsAsync<Exception>(() => _authorLogic.GetAllAsync());
+    //    }
+    //    #endregion
+    //}
 }

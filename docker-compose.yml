@@ -1,4 +1,4 @@
-name: Book App
+name: dotNET Book App
 
 services:
   project-database:

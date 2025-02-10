@@ -5,11 +5,11 @@ namespace Book_App_API.Domain.Entity
     public class BookAuthor
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        public Guid BookId { get; set; }
+        public int BookId { get; set; }
 
-        public Guid AuthorId { get; set; }
+        public int AuthorId { get; set; }
 
 
         public Book Book { get; set; }

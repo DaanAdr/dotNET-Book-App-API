@@ -23,7 +23,7 @@ namespace Book_App_API.Infrastructure.Database
             modelBuilder.Entity<BookAuthor>().HasKey(ba => new {ba.AuthorId, ba.BookId});
 
             modelBuilder.Entity<BookAuthor>()
-                .HasOne(ba => ba.Books)
+                .HasOne(ba => ba.Book)
                 .WithMany(ba => ba.BookAuthors)
                 .HasForeignKey(ba => ba.BookId);
 

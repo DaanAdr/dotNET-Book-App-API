@@ -2,7 +2,7 @@
 {
     public class ReaderAgeGetDTO
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string AgeRange { get; set; }
     }
 }
