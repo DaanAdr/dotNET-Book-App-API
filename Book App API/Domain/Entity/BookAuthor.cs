@@ -12,7 +12,7 @@ namespace Book_App_API.Domain.Entity
         public Guid AuthorId { get; set; }
 
 
-        public Book Books { get; set; }
+        public Book Book { get; set; }
         public Author Author { get; set; }
     }
 }
