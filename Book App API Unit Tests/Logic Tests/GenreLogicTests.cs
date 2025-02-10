@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Book_App_API.Business.Logic;
+﻿using Book_App_API.Business.Logic;
 using Book_App_API.Domain.DTOs.GenreDTOs;
 using Book_App_API.Domain.Entity;
 using Book_App_API.Infrastructure.Database.Interfaces;
 using Book_App_API.Infrastructure.Database.Seed_data;
-using Book_App_API.Logic.Interfaces;
 using Moq;
 
 namespace Book_App_API_Unit_Tests.Logic_Tests
 {
-    internal class GenreLogicTests
+    public class GenreLogicTests
     {
         private readonly Mock<IGenreRepository> _mockRepository;
         private readonly GenreLogic _genreLogic;

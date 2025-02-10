@@ -5,7 +5,7 @@ using Book_App_API.Infrastructure.Database.Interfaces;
 using Book_App_API.Infrastructure.Database.Seed_data;
 using Moq;
 
-namespace Book_App_API_Unit_Tests
+namespace Book_App_API_Unit_Tests.Logic_Tests
 {
     public class ReaderAgeLogicTests
     {
