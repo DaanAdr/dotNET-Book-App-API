@@ -4,6 +4,7 @@ using Book_App_API.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_App_API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250210104541_SeedAuthorTable")]
+    partial class SeedAuthorTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,72 +146,6 @@ namespace Book_App_API.Migrations
                     b.HasIndex("ReaderAgeId");
 
                     b.ToTable("Books");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Pages = 464,
-                            PublishDate = new DateTime(2007, 7, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReaderAgeId = 5,
-                            Title = "Tunnels"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Pages = 655,
-                            PublishDate = new DateTime(2009, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReaderAgeId = 5,
-                            Title = "Deeper"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Pages = 577,
-                            PublishDate = new DateTime(2009, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReaderAgeId = 5,
-                            Title = "Freefall"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Pages = 508,
-                            PublishDate = new DateTime(2010, 5, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReaderAgeId = 5,
-                            Title = "Closer"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Pages = 443,
-                            PublishDate = new DateTime(2011, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReaderAgeId = 5,
-                            Title = "Spiral"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Pages = 402,
-                            PublishDate = new DateTime(2013, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReaderAgeId = 5,
-                            Title = "Terminal"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Pages = 328,
-                            PublishDate = new DateTime(1949, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReaderAgeId = 6,
-                            Title = "Nineteen Eighty-Four"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Pages = 253,
-                            PublishDate = new DateTime(1950, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReaderAgeId = 6,
-                            Title = "I, Robot"
-                        });
                 });
 
             modelBuilder.Entity("Book_App_API.Domain.Entity.BookAuthor", b =>
@@ -227,92 +164,6 @@ namespace Book_App_API.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("BookAuthor");
-
-                    b.HasData(
-                        new
-                        {
-                            AuthorId = 1,
-                            BookId = 1,
-                            Id = 1
-                        },
-                        new
-                        {
-                            AuthorId = 2,
-                            BookId = 1,
-                            Id = 2
-                        },
-                        new
-                        {
-                            AuthorId = 1,
-                            BookId = 2,
-                            Id = 3
-                        },
-                        new
-                        {
-                            AuthorId = 2,
-                            BookId = 2,
-                            Id = 4
-                        },
-                        new
-                        {
-                            AuthorId = 1,
-                            BookId = 3,
-                            Id = 5
-                        },
-                        new
-                        {
-                            AuthorId = 2,
-                            BookId = 3,
-                            Id = 6
-                        },
-                        new
-                        {
-                            AuthorId = 1,
-                            BookId = 4,
-                            Id = 7
-                        },
-                        new
-                        {
-                            AuthorId = 2,
-                            BookId = 4,
-                            Id = 8
-                        },
-                        new
-                        {
-                            AuthorId = 1,
-                            BookId = 5,
-                            Id = 9
-                        },
-                        new
-                        {
-                            AuthorId = 2,
-                            BookId = 5,
-                            Id = 10
-                        },
-                        new
-                        {
-                            AuthorId = 1,
-                            BookId = 6,
-                            Id = 11
-                        },
-                        new
-                        {
-                            AuthorId = 2,
-                            BookId = 6,
-                            Id = 12
-                        },
-                        new
-                        {
-                            AuthorId = 4,
-                            BookId = 7,
-                            Id = 13
-                        },
-                        new
-                        {
-                            AuthorId = 10,
-                            BookId = 8,
-                            Id = 14
-                        });
                 });
 
             modelBuilder.Entity("Book_App_API.Domain.Entity.BookGenre", b =>
@@ -331,98 +182,6 @@ namespace Book_App_API.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("BookGenres");
-
-                    b.HasData(
-                        new
-                        {
-                            GenreId = 1,
-                            BookId = 1,
-                            Id = 1
-                        },
-                        new
-                        {
-                            GenreId = 2,
-                            BookId = 1,
-                            Id = 2
-                        },
-                        new
-                        {
-                            GenreId = 1,
-                            BookId = 2,
-                            Id = 3
-                        },
-                        new
-                        {
-                            GenreId = 2,
-                            BookId = 2,
-                            Id = 4
-                        },
-                        new
-                        {
-                            GenreId = 1,
-                            BookId = 3,
-                            Id = 5
-                        },
-                        new
-                        {
-                            GenreId = 2,
-                            BookId = 3,
-                            Id = 6
-                        },
-                        new
-                        {
-                            GenreId = 1,
-                            BookId = 4,
-                            Id = 7
-                        },
-                        new
-                        {
-                            GenreId = 2,
-                            BookId = 4,
-                            Id = 8
-                        },
-                        new
-                        {
-                            GenreId = 1,
-                            BookId = 5,
-                            Id = 9
-                        },
-                        new
-                        {
-                            GenreId = 2,
-                            BookId = 5,
-                            Id = 10
-                        },
-                        new
-                        {
-                            GenreId = 1,
-                            BookId = 6,
-                            Id = 11
-                        },
-                        new
-                        {
-                            GenreId = 2,
-                            BookId = 6,
-                            Id = 12
-                        },
-                        new
-                        {
-                            GenreId = 3,
-                            BookId = 7,
-                            Id = 13
-                        },
-                        new
-                        {
-                            GenreId = 2,
-                            BookId = 7,
-                            Id = 14
-                        },
-                        new
-                        {
-                            GenreId = 2,
-                            BookId = 8,
-                            Id = 15
-                        });
                 });
 
             modelBuilder.Entity("Book_App_API.Domain.Entity.Genre", b =>

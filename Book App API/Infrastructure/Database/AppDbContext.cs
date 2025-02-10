@@ -1,4 +1,5 @@
 ﻿using Book_App_API.Domain.Entity;
+using Book_App_API.Infrastructure.Database.Seed_data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_App_API.Infrastructure.Database
@@ -44,6 +45,20 @@ namespace Book_App_API.Infrastructure.Database
                 .HasOne(bg => bg.Genre)
                 .WithMany()
                 .HasForeignKey(bg => bg.GenreId);
+
+            //Seed Genre table
+            modelBuilder.Entity<Genre>().HasData(BooksSeedData.genreSeedData);
+
+            //Seed ReaderAge table
+            modelBuilder.Entity<ReaderAge>().HasData(BooksSeedData.readerAgeSeedData);
+
+            //Seed Author table
+            modelBuilder.Entity<Author>().HasData(BooksSeedData.authorSeedData);
+
+            //Seed Book table and its relations
+            modelBuilder.Entity<Book>().HasData(BooksSeedData.bookSeedData);
+            modelBuilder.Entity<BookAuthor>().HasData(BooksSeedData.bookAuthorSeedData);
+            modelBuilder.Entity<BookGenre>().HasData(BooksSeedData.bookGenreSeedData);
         }
     }
 }
