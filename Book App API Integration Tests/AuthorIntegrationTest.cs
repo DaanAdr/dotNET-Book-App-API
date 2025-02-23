@@ -1,8 +1,9 @@
+using System.Net;
+using System.Text;
+using System.Transactions;
 using Book_App_API.Domain.DTOs.AuthorDTOs;
 using Book_App_API.Infrastructure.Database.Seed_data;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
-using System.Net;
 
 namespace Book_App_API_Integration_Tests
 {
@@ -39,6 +40,37 @@ namespace Book_App_API_Integration_Tests
 
                 index++;
             }
+        }
+
+        [Fact]
+        public async Task PostAsync_CreateAuthor_ReturnsStatus201Created()
+        {
+            // Arrange
+            AuthorPostDTO postObj = new AuthorPostDTO
+            {
+                Firstname = "Nigel",
+                Surname = "Young"
+            };
+
+            string postJsonObj = JsonConvert.SerializeObject(postObj);
+            StringContent bodyContent = new StringContent(postJsonObj, Encoding.UTF8, "application/json");
+
+            // Act
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+
+            using (TransactionScope transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                httpResponse = await _client.PostAsync("/author", bodyContent);
+            }
+
+            string httpContent = httpResponse.Content.ReadAsStringAsync().Result;
+            AuthorGetDTO author = JsonConvert.DeserializeObject<AuthorGetDTO>(httpContent);
+
+            // Assert
+            Assert.Equal(expected: HttpStatusCode.Created, actual: httpResponse.StatusCode);
+            Assert.Equal(postObj.Firstname, author.Firstname);
+            Assert.Equal(postObj.Surname, author.Surname);
+            Assert.Equal(13, author.Id);
         }
     }
 }
