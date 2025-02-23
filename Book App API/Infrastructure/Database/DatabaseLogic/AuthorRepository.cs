@@ -23,7 +23,7 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
             return await _dbContext.Author.FirstOrDefaultAsync(a => a.Firstname == author.Firstname && a.Surname == a.Surname);
         }
 
-        public async Task<Author?> GetByIdAsync(Guid id)
+        public async Task<Author?> GetByIdAsync(int id)
         {
             return await _dbContext.Author.FindAsync(id);
         }
@@ -52,7 +52,7 @@ namespace Book_App_API.Infrastructure.Database.DatabaseLogic
             return author;
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(int id)
         {
             Author? author = await GetByIdAsync(id);
 

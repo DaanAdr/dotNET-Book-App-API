@@ -85,7 +85,7 @@ namespace Book_App_API.Business.Logic
             try
             {
                 //Find author at ID
-                Author? author = await _dbLogic.GetByIdAsync(Guid.Parse(id));
+                Author? author = await _dbLogic.GetByIdAsync(int.Parse(id));
 
                 //If no author found, return error
                 if (author == null)
@@ -131,7 +131,7 @@ namespace Book_App_API.Business.Logic
         {
             try
             {
-                return await _dbLogic.DeleteAsync(Guid.Parse(id));
+                return await _dbLogic.DeleteAsync(int.Parse(id));
             }
             catch (Exception)
             {

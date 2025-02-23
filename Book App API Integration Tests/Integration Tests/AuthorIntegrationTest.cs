@@ -3,6 +3,7 @@ using System.Text;
 using System.Transactions;
 using Book_App_API.Domain.DTOs.AuthorDTOs;
 using Book_App_API.Infrastructure.Database.Seed_data;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace Book_App_API_Integration_Tests
@@ -57,14 +58,8 @@ namespace Book_App_API_Integration_Tests
             StringContent bodyContent = new StringContent(postJsonObj, Encoding.UTF8, "application/json");
 
             // Act
-            HttpResponseMessage httpResponsePost = new HttpResponseMessage();
-            HttpResponseMessage httpResponseGet = new HttpResponseMessage();
-
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                httpResponsePost = await _client.PostAsync("/author", bodyContent);
-                httpResponseGet = await _client.GetAsync("/author");
-            }
+            HttpResponseMessage httpResponsePost = await _client.PostAsync("/author", bodyContent);
+            HttpResponseMessage httpResponseGet = await _client.GetAsync("/author");
 
             string httpContentPost = httpResponsePost.Content.ReadAsStringAsync().Result;
             AuthorGetDTO? author = JsonConvert.DeserializeObject<AuthorGetDTO>(httpContentPost);
@@ -78,8 +73,13 @@ namespace Book_App_API_Integration_Tests
             Assert.Equal(postObj.Surname, author.Surname);
             Assert.Equal(13, author.Id);
 
+            // Check if the value really has been added to the database
+            AuthorGetDTO authorInDb = authors[12];
+
             Assert.Equal(13, authors.Count());
-            Assert.Equal(author, authors[12]);
+            Assert.Equal(author.Id, authorInDb.Id);
+            Assert.Equal(author.Firstname, authorInDb.Firstname);
+            Assert.Equal(author.Surname, authorInDb.Surname);
         }
 
         [Fact]
@@ -95,12 +95,7 @@ namespace Book_App_API_Integration_Tests
             StringContent bodyContent = new StringContent(postJsonObj, Encoding.UTF8, "application/json");
 
             // Act
-            HttpResponseMessage httpResponse = new HttpResponseMessage();
-
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                httpResponse = await _client.PostAsync("/author", bodyContent);
-            }
+            HttpResponseMessage httpResponse = await _client.PostAsync("/author", bodyContent);
 
             string httpContent = httpResponse.Content.ReadAsStringAsync().Result;
             ErrorResponse? errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(httpContent);
@@ -124,12 +119,7 @@ namespace Book_App_API_Integration_Tests
             StringContent bodyContent = new StringContent(postJsonObj, Encoding.UTF8, "application/json");
 
             // Act
-            HttpResponseMessage httpResponse = new HttpResponseMessage();
-
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                httpResponse = await _client.PostAsync("/author", bodyContent);
-            }
+            HttpResponseMessage httpResponse = await _client.PostAsync("/author", bodyContent);
 
             string httpContent = httpResponse.Content.ReadAsStringAsync().Result;
             ErrorResponse? errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(httpContent);
@@ -153,12 +143,7 @@ namespace Book_App_API_Integration_Tests
             StringContent bodyContent = new StringContent(postJsonObj, Encoding.UTF8, "application/json");
 
             // Act
-            HttpResponseMessage httpResponse = new HttpResponseMessage();
-
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                httpResponse = await _client.PostAsync("/author", bodyContent);
-            }
+            HttpResponseMessage httpResponse = await _client.PostAsync("/author", bodyContent);
 
             string httpContent = httpResponse.Content.ReadAsStringAsync().Result;
             ErrorResponse? errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(httpContent);
@@ -181,12 +166,7 @@ namespace Book_App_API_Integration_Tests
             StringContent bodyContent = new StringContent(postJsonObj, Encoding.UTF8, "application/json");
 
             // Act
-            HttpResponseMessage httpResponse = new HttpResponseMessage();
-
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                httpResponse = await _client.PostAsync("/author", bodyContent);
-            }
+            HttpResponseMessage httpResponse = await _client.PostAsync("/author", bodyContent);
 
             string httpContent = httpResponse.Content.ReadAsStringAsync().Result;
             ErrorResponse? errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(httpContent);
@@ -210,12 +190,7 @@ namespace Book_App_API_Integration_Tests
             StringContent bodyContent = new StringContent(postJsonObj, Encoding.UTF8, "application/json");
 
             // Act
-            HttpResponseMessage httpResponse = new HttpResponseMessage();
-
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                httpResponse = await _client.PostAsync("/author", bodyContent);
-            }
+            HttpResponseMessage httpResponse = await _client.PostAsync("/author", bodyContent);
 
             string httpContent = httpResponse.Content.ReadAsStringAsync().Result;
             ErrorResponse? errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(httpContent);
@@ -239,12 +214,7 @@ namespace Book_App_API_Integration_Tests
             StringContent bodyContent = new StringContent(postJsonObj, Encoding.UTF8, "application/json");
 
             // Act
-            HttpResponseMessage httpResponse = new HttpResponseMessage();
-
-            using (TransactionScope transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                httpResponse = await _client.PostAsync("/author", bodyContent);
-            }
+            HttpResponseMessage httpResponse = await _client.PostAsync("/author", bodyContent);
 
             string httpContent = httpResponse.Content.ReadAsStringAsync().Result;
             ErrorResponse? errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(httpContent);
@@ -252,6 +222,43 @@ namespace Book_App_API_Integration_Tests
             // Assert
             Assert.Equal(expected: HttpStatusCode.BadRequest, actual: httpResponse.StatusCode);
             Assert.Contains("Surname can only contain letters.", errorResponse.Errors["Surname"]);
+        }
+        #endregion
+
+        #region DELETE
+        [Fact]
+        public async Task DeleteAsync_CorrectId_ReturnsStatus200Ok()
+        {
+            // Act
+            HttpResponseMessage httpResponseDelete = await _client.DeleteAsync("/author/3");
+            HttpResponseMessage httpResponseGet = await _client.GetAsync("/author");
+
+            string httpContentDelete = httpResponseDelete.Content.ReadAsStringAsync().Result;
+            //AuthorGetDTO? author = JsonConvert.DeserializeObject<AuthorGetDTO>(httpContentPost);
+
+            string httpContentGet = httpResponseGet.Content.ReadAsStringAsync().Result;
+            List<AuthorGetDTO>? authors = JsonConvert.DeserializeObject<List<AuthorGetDTO>>(httpContentGet);
+
+            // Assert
+            Assert.Equal(expected: HttpStatusCode.OK, actual: httpResponseDelete.StatusCode);
+            Assert.Equal("Author deleted!", httpContentDelete);
+
+            // Check if the record has been removed from the database
+            Assert.False(authors.Exists(x => x.Id == 3));
+        }
+
+        [Fact]
+        public async Task DeleteAsync_IncorrectId_ReturnsStatus404BadRequest()
+        {
+            // Act
+            HttpResponseMessage httpResponseDelete = await _client.DeleteAsync("/author/103");
+            HttpResponseMessage httpResponseGet = await _client.GetAsync("/author");
+
+            string httpContent = httpResponseDelete.Content.ReadAsStringAsync().Result;
+
+            // Assert
+            Assert.Equal(expected: HttpStatusCode.NotFound, actual: httpResponseDelete.StatusCode);
+            Assert.Equal("Author with ID 103 not found.", httpContent);
         }
         #endregion
     }
