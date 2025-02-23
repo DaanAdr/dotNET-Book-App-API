@@ -6,45 +6,51 @@ using Book_App_API.Infrastructure.Database.Logic;
 using Book_App_API.Logic.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
+public class Program
 {
-    optionsBuilder.UseSqlServer(builder.Configuration["DBConnectionString"]!);
-});
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IGenreRepository, GenreRepository>();
-builder.Services.AddScoped<IGenreLogic, GenreLogic>();
+        // Add services to the container.
 
-builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
-builder.Services.AddScoped<IAuthorLogic, AuthorLogic>();
+        builder.Services.AddControllers();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IReaderAgeRepository, ReaderAgeRepository>();
-builder.Services.AddScoped<IReaderAgeLogic, ReaderAgeLogic>();
+        builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
+        {
+            optionsBuilder.UseSqlServer(builder.Configuration["DBConnectionString"]!);
+        });
 
-builder.Services.AddScoped<IBookRepository, BookRepository>();
-builder.Services.AddScoped<IBookLogic, BookLogic>();
+        builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+        builder.Services.AddScoped<IGenreLogic, GenreLogic>();
 
-var app = builder.Build();
+        builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+        builder.Services.AddScoped<IAuthorLogic, AuthorLogic>();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+        builder.Services.AddScoped<IReaderAgeRepository, ReaderAgeRepository>();
+        builder.Services.AddScoped<IReaderAgeLogic, ReaderAgeLogic>();
+
+        builder.Services.AddScoped<IBookRepository, BookRepository>();
+        builder.Services.AddScoped<IBookLogic, BookLogic>();
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.UseHttpsRedirection();
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
