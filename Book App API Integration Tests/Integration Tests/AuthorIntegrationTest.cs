@@ -57,21 +57,29 @@ namespace Book_App_API_Integration_Tests
             StringContent bodyContent = new StringContent(postJsonObj, Encoding.UTF8, "application/json");
 
             // Act
-            HttpResponseMessage httpResponse = new HttpResponseMessage();
+            HttpResponseMessage httpResponsePost = new HttpResponseMessage();
+            HttpResponseMessage httpResponseGet = new HttpResponseMessage();
 
             using (TransactionScope transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                httpResponse = await _client.PostAsync("/author", bodyContent);
+                httpResponsePost = await _client.PostAsync("/author", bodyContent);
+                httpResponseGet = await _client.GetAsync("/author");
             }
 
-            string httpContent = httpResponse.Content.ReadAsStringAsync().Result;
-            AuthorGetDTO? author = JsonConvert.DeserializeObject<AuthorGetDTO>(httpContent);
+            string httpContentPost = httpResponsePost.Content.ReadAsStringAsync().Result;
+            AuthorGetDTO? author = JsonConvert.DeserializeObject<AuthorGetDTO>(httpContentPost);
+
+            string httpContentGet = httpResponseGet.Content.ReadAsStringAsync().Result;
+            List<AuthorGetDTO>? authors = JsonConvert.DeserializeObject<List<AuthorGetDTO>>(httpContentGet);
 
             // Assert
-            Assert.Equal(expected: HttpStatusCode.Created, actual: httpResponse.StatusCode);
+            Assert.Equal(expected: HttpStatusCode.Created, actual: httpResponsePost.StatusCode);
             Assert.Equal(postObj.Firstname, author.Firstname);
             Assert.Equal(postObj.Surname, author.Surname);
             Assert.Equal(13, author.Id);
+
+            Assert.Equal(13, authors.Count());
+            Assert.Equal(author, authors[12]);
         }
 
         [Fact]
