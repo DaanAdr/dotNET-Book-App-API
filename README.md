@@ -1,2 +1,2 @@
-# Book-App-API
-A C# dotNET API to demonstrate my ability to program in C#
+# Program architecture
+When starting this project, the application followed a repository pattern for its architecture. I have since come to view the pattern as superfluous for most applications. And have instead begun to become more a fan of keeping things simple. As such I've resorted to putting most, if not all, of my logic into the controller in an effort to keep the application easily readable.

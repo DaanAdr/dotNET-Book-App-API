@@ -1,6 +1,6 @@
-﻿using Book_App_API.Domain.DTOs.GenreDTOs;
+﻿using Book_App_API.Business.Logic;
+using Book_App_API.Domain.DTOs.GenreDTOs;
 using Book_App_API.Domain.Entity;
-using Book_App_API.Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_App_API.Controllers
@@ -9,9 +9,9 @@ namespace Book_App_API.Controllers
     [Route("[controller]")]
     public class GenreController : Controller
     {
-        private readonly IGenreLogic _logic;
+        private readonly GenreLogic _logic;
 
-        public GenreController(IGenreLogic genreLogic)
+        public GenreController(GenreLogic genreLogic)
         {
             _logic = genreLogic;
         }

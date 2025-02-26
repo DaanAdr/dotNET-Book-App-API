@@ -1,15 +1,14 @@
 ﻿using Book_App_API.Domain.DTOs.GenreDTOs;
 using Book_App_API.Domain.Entity;
-using Book_App_API.Infrastructure.Database.Interfaces;
-using Book_App_API.Logic.Interfaces;
+using Book_App_API.Infrastructure.Database.Logic;
 
 namespace Book_App_API.Business.Logic
 {
-    public class GenreLogic : IGenreLogic
+    public class GenreLogic 
     {
-        private readonly IGenreRepository _dbLogic;
+        private readonly GenreRepository _dbLogic;
 
-        public GenreLogic(IGenreRepository databaseLogic)
+        public GenreLogic(GenreRepository databaseLogic)
         {
             _dbLogic = databaseLogic;
         }

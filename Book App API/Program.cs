@@ -1,9 +1,7 @@
 using Book_App_API.Business.Logic;
 using Book_App_API.Infrastructure.Database;
 using Book_App_API.Infrastructure.Database.DatabaseLogic;
-using Book_App_API.Infrastructure.Database.Interfaces;
 using Book_App_API.Infrastructure.Database.Logic;
-using Book_App_API.Logic.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 public class Program
@@ -24,17 +22,17 @@ public class Program
             optionsBuilder.UseSqlServer(builder.Configuration["DBConnectionString"]!);
         });
 
-        builder.Services.AddScoped<IGenreRepository, GenreRepository>();
-        builder.Services.AddScoped<IGenreLogic, GenreLogic>();
+        builder.Services.AddScoped<GenreRepository>();
+        builder.Services.AddScoped<GenreLogic>();
 
-        builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
-        builder.Services.AddScoped<IAuthorLogic, AuthorLogic>();
+        builder.Services.AddScoped<AuthorRepository>();
+        builder.Services.AddScoped<AuthorLogic>();
 
-        builder.Services.AddScoped<IReaderAgeRepository, ReaderAgeRepository>();
-        builder.Services.AddScoped<IReaderAgeLogic, ReaderAgeLogic>();
+        builder.Services.AddScoped<ReaderAgeRepository>();
+        builder.Services.AddScoped<ReaderAgeLogic>();
 
-        builder.Services.AddScoped<IBookRepository, BookRepository>();
-        builder.Services.AddScoped<IBookLogic, BookLogic>();
+        builder.Services.AddScoped<BookRepository>();
+        builder.Services.AddScoped<BookLogic>();
 
         var app = builder.Build();
 

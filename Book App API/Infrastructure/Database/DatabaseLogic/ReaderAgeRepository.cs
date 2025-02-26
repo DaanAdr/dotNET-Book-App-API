@@ -1,10 +1,9 @@
 ﻿using Book_App_API.Domain.Entity;
-using Book_App_API.Infrastructure.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_App_API.Infrastructure.Database.DatabaseLogic
 {
-    public class ReaderAgeRepository : IReaderAgeRepository
+    public class ReaderAgeRepository 
     {
         private readonly AppDbContext _dbContext;
 

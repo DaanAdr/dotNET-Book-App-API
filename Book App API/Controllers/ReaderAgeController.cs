@@ -1,6 +1,6 @@
-﻿using Book_App_API.Domain.DTOs.ReaderAgeDTOs;
+﻿using Book_App_API.Business.Logic;
+using Book_App_API.Domain.DTOs.ReaderAgeDTOs;
 using Book_App_API.Domain.Entity;
-using Book_App_API.Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_App_API.Controllers
@@ -9,9 +9,9 @@ namespace Book_App_API.Controllers
     [Route("[controller]")]
     public class ReaderAgeController : Controller
     {
-        private readonly IReaderAgeLogic _logic;
+        private readonly ReaderAgeLogic _logic;
 
-        public ReaderAgeController(IReaderAgeLogic logic)
+        public ReaderAgeController(ReaderAgeLogic logic)
         {
             _logic = logic;
         }

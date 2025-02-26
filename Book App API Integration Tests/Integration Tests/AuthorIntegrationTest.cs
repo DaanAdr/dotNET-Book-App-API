@@ -9,6 +9,7 @@ namespace Book_App_API_Integration_Tests
     public class AuthorIntegrationTest : IClassFixture<IntegrationTestWebApplicationFactory>
     {
         private readonly HttpClient _client;
+        // TODO: Refresh database after each test
 
         public AuthorIntegrationTest(IntegrationTestWebApplicationFactory factory)
         {

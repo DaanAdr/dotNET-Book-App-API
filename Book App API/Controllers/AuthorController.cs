@@ -1,6 +1,6 @@
-﻿using Book_App_API.Domain.DTOs.AuthorDTOs;
+﻿using Book_App_API.Business.Logic;
+using Book_App_API.Domain.DTOs.AuthorDTOs;
 using Book_App_API.Domain.Entity;
-using Book_App_API.Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_App_API.Controllers
@@ -9,9 +9,9 @@ namespace Book_App_API.Controllers
     [Route("[controller]")]
     public class AuthorController : Controller
     {
-        private readonly IAuthorLogic _logic;
+        private readonly AuthorLogic _logic;
 
-        public AuthorController(IAuthorLogic authorLogic)
+        public AuthorController(AuthorLogic authorLogic)
         {
             _logic = authorLogic;
         }

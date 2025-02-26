@@ -1,10 +1,9 @@
 ﻿using Book_App_API.Domain.Entity;
-using Book_App_API.Infrastructure.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_App_API.Infrastructure.Database.Logic
 {
-    public class GenreRepository : IGenreRepository
+    public class GenreRepository
     {
         private readonly AppDbContext _dbContext;
 

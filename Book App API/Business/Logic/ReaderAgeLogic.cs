@@ -1,15 +1,14 @@
 ﻿using Book_App_API.Domain.DTOs.ReaderAgeDTOs;
 using Book_App_API.Domain.Entity;
-using Book_App_API.Infrastructure.Database.Interfaces;
-using Book_App_API.Logic.Interfaces;
+using Book_App_API.Infrastructure.Database.DatabaseLogic;
 
 namespace Book_App_API.Business.Logic
 {
-    public class ReaderAgeLogic : IReaderAgeLogic
+    public class ReaderAgeLogic 
     {
-        private readonly IReaderAgeRepository _dbLogic;
+        private readonly ReaderAgeRepository _dbLogic;
 
-        public ReaderAgeLogic(IReaderAgeRepository databaseLogic)
+        public ReaderAgeLogic(ReaderAgeRepository databaseLogic)
         {
             _dbLogic = databaseLogic;
         }
