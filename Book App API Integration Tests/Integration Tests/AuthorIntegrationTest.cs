@@ -22,7 +22,7 @@ namespace Book_App_API_Integration_Tests
             // Act
             HttpResponseMessage httpResponse = await _client.GetAsync("/author");
             string httpContent = httpResponse.Content.ReadAsStringAsync().Result;
-            List<AuthorGetDTO>? authors = JsonConvert.DeserializeObject<List<AuthorGetDTO>>(httpContent);
+            List<AuthorGetAndDeleteDTO>? authors = JsonConvert.DeserializeObject<List<AuthorGetAndDeleteDTO>>(httpContent);
 
             // Assert
             Assert.Equal(expected: HttpStatusCode.OK, actual: httpResponse.StatusCode);
@@ -30,7 +30,7 @@ namespace Book_App_API_Integration_Tests
             List<Book_App_API.Domain.Entity.Author> seedData = BooksSeedData.authorSeedData;
             int index = 0;
 
-            foreach (AuthorGetDTO author in authors)
+            foreach (AuthorGetAndDeleteDTO author in authors)
             {
                 Book_App_API.Domain.Entity.Author seededAuthor = seedData[index];
 
@@ -61,10 +61,10 @@ namespace Book_App_API_Integration_Tests
             HttpResponseMessage httpResponseGet = await _client.GetAsync("/author");
 
             string httpContentPost = httpResponsePost.Content.ReadAsStringAsync().Result;
-            AuthorGetDTO? author = JsonConvert.DeserializeObject<AuthorGetDTO>(httpContentPost);
+            AuthorGetAndDeleteDTO? author = JsonConvert.DeserializeObject<AuthorGetAndDeleteDTO>(httpContentPost);
 
             string httpContentGet = httpResponseGet.Content.ReadAsStringAsync().Result;
-            List<AuthorGetDTO>? authors = JsonConvert.DeserializeObject<List<AuthorGetDTO>>(httpContentGet);
+            List<AuthorGetAndDeleteDTO>? authors = JsonConvert.DeserializeObject<List<AuthorGetAndDeleteDTO>>(httpContentGet);
 
             // Assert
             Assert.Equal(expected: HttpStatusCode.Created, actual: httpResponsePost.StatusCode);
@@ -73,7 +73,7 @@ namespace Book_App_API_Integration_Tests
             Assert.Equal(13, author.Id);
 
             // Check if the value really has been added to the database
-            AuthorGetDTO authorInDb = authors[12];
+            AuthorGetAndDeleteDTO authorInDb = authors[12];
 
             Assert.Equal(13, authors.Count());
             Assert.Equal(author.Id, authorInDb.Id);
@@ -243,10 +243,10 @@ namespace Book_App_API_Integration_Tests
             HttpResponseMessage httpResponseGet = await _client.GetAsync("/author");
 
             string httpContentPatch = httpResponsePatch.Content.ReadAsStringAsync().Result;
-            AuthorGetDTO? author = JsonConvert.DeserializeObject<AuthorGetDTO>(httpContentPatch);
+            AuthorGetAndDeleteDTO? author = JsonConvert.DeserializeObject<AuthorGetAndDeleteDTO>(httpContentPatch);
 
             string httpContentGet = httpResponseGet.Content.ReadAsStringAsync().Result;
-            List<AuthorGetDTO>? authors = JsonConvert.DeserializeObject<List<AuthorGetDTO>>(httpContentGet);
+            List<AuthorGetAndDeleteDTO>? authors = JsonConvert.DeserializeObject<List<AuthorGetAndDeleteDTO>>(httpContentGet);
 
             // Assert
             Assert.Equal(expected: HttpStatusCode.OK, actual: httpResponsePatch.StatusCode);
@@ -255,7 +255,7 @@ namespace Book_App_API_Integration_Tests
             Assert.Equal(2, author.Id);
 
             // Check if the value really has been added to the database
-            AuthorGetDTO? changedAuthor = authors.FirstOrDefault(x => x.Id == 2);
+            AuthorGetAndDeleteDTO? changedAuthor = authors.FirstOrDefault(x => x.Id == 2);
 
             Assert.Equal(author.Id, changedAuthor.Id);
             Assert.Equal(author.Firstname, changedAuthor.Firstname);
@@ -371,7 +371,7 @@ namespace Book_App_API_Integration_Tests
             //AuthorGetDTO? author = JsonConvert.DeserializeObject<AuthorGetDTO>(httpContentPost);
 
             string httpContentGet = httpResponseGet.Content.ReadAsStringAsync().Result;
-            List<AuthorGetDTO>? authors = JsonConvert.DeserializeObject<List<AuthorGetDTO>>(httpContentGet);
+            List<AuthorGetAndDeleteDTO>? authors = JsonConvert.DeserializeObject<List<AuthorGetAndDeleteDTO>>(httpContentGet);
 
             // Assert
             Assert.Equal(expected: HttpStatusCode.OK, actual: httpResponseDelete.StatusCode);

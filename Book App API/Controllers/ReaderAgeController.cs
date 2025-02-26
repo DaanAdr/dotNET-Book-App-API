@@ -1,7 +1,8 @@
-﻿using Book_App_API.Business.Logic;
-using Book_App_API.Domain.DTOs.ReaderAgeDTOs;
+﻿using Book_App_API.Domain.DTOs.ReaderAgeDTOs;
 using Book_App_API.Domain.Entity;
+using Book_App_API.Infrastructure.Database;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Book_App_API.Controllers
 {
@@ -9,11 +10,11 @@ namespace Book_App_API.Controllers
     [Route("[controller]")]
     public class ReaderAgeController : Controller
     {
-        private readonly ReaderAgeLogic _logic;
+        private readonly AppDbContext _dbContext;
 
-        public ReaderAgeController(ReaderAgeLogic logic)
+        public ReaderAgeController(AppDbContext appDbContext)
         {
-            _logic = logic;
+            _dbContext = appDbContext;
         }
 
         [HttpGet]
@@ -23,12 +24,19 @@ namespace Book_App_API.Controllers
         {
             try
             {
-                List<ReaderAgeGetDTO> response = await _logic.GetAllAsync();
-                return Ok(response);
+                List<ReaderAge> readerAges = await _dbContext.ReaderAges.ToListAsync();
+
+                IEnumerable<ReaderAgeGetDTO> dtos = readerAges.Select(r => new ReaderAgeGetDTO
+                {
+                    Id = r.Id,
+                    AgeRange = r.AgeRange
+                });
+
+                return Ok(dtos);
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving authors. Please try again later.");
             }
         }
     }

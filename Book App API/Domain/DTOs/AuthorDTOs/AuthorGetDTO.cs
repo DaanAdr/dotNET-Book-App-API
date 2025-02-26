@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Book_App_API.Domain.DTOs.AuthorDTOs
+﻿namespace Book_App_API.Domain.DTOs.AuthorDTOs
 {
     public class AuthorGetDTO
     {

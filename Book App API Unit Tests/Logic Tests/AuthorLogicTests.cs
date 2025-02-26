@@ -32,7 +32,7 @@ namespace Book_App_API_Unit_Tests.Logic_Tests
             _mockRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(authors);
 
             //Act
-            List<AuthorGetDTO> result = await _authorLogic.GetAllAsync();
+            List<AuthorGetAndDeleteDTO> result = await _authorLogic.GetAllAsync();
 
             //Assert
             Assert.NotNull(result);

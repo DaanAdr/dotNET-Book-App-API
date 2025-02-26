@@ -1,7 +1,9 @@
 ﻿using Book_App_API.Business.Logic;
 using Book_App_API.Domain.DTOs.BookDTOs;
 using Book_App_API.Domain.Entity;
+using Book_App_API.Infrastructure.Database;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Book_App_API.Controllers
 {
@@ -9,11 +11,11 @@ namespace Book_App_API.Controllers
     [Route("[controller]")]
     public class BookController : Controller
     {
-        private readonly BookLogic _logic;
+        private readonly AppDbContext _dbContext;
 
-        public BookController(BookLogic logic)
+        public BookController(AppDbContext appDbContext)
         {
-            _logic = logic;
+            _dbContext = appDbContext;
         }
 
         [HttpGet]
@@ -23,12 +25,25 @@ namespace Book_App_API.Controllers
         {
             try
             {
-                List<BookGetDTO> genres = await _logic.GetAllAsync();
-                return Ok(genres);
+                List<Book> books = await _dbContext.Books.ToListAsync();
+
+                List<BookGetDTO> dtos = books.Select(b => new BookGetDTO
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Pages = b.Pages,
+                    PublishDate = b.PublishDate,
+                    ReaderAge = b.ReaderAge.AgeRange,
+                    Authors = b.BookAuthors.Select(a => $"{a.Author.Firstname} {a.Author.Surname}").ToList(),
+                    Genres = b.BookGenres.Select(g => g.Genre.GenreName).ToList()
+                }).ToList();
+
+                return Ok(dtos);
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                // TODO: Log the exception
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving authors. Please try again later.");
             }
         }
     }

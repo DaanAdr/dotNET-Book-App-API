@@ -1,7 +1,8 @@
-﻿using Book_App_API.Business.Logic;
-using Book_App_API.Domain.DTOs.GenreDTOs;
+﻿using Book_App_API.Domain.DTOs.GenreDTOs;
 using Book_App_API.Domain.Entity;
+using Book_App_API.Infrastructure.Database;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Book_App_API.Controllers
 {
@@ -9,11 +10,11 @@ namespace Book_App_API.Controllers
     [Route("[controller]")]
     public class GenreController : Controller
     {
-        private readonly GenreLogic _logic;
+        private readonly AppDbContext _dbContext;
 
-        public GenreController(GenreLogic genreLogic)
+        public GenreController(AppDbContext appDbContext)
         {
-            _logic = genreLogic;
+            _dbContext = appDbContext;
         }
 
         [HttpGet]
@@ -23,12 +24,20 @@ namespace Book_App_API.Controllers
         {
             try
             {
-                List<GenreGetDTO> genres = await _logic.GetAllAsync();
-                return Ok(genres);
+                List<Genre> genres = await _dbContext.Genres.ToListAsync();
+
+                List<GenreGetDTO> dtos = genres.Select(g => new GenreGetDTO
+                {
+                    Id = g.Id,
+                    GenreName = g.GenreName
+                }).ToList();
+
+                return Ok(dtos);
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                // TODO: Log the exception
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving authors. Please try again later.");
             }
         }
     }
