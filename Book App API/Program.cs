@@ -1,7 +1,4 @@
-using Book_App_API.Business.Logic;
 using Book_App_API.Infrastructure.Database;
-using Book_App_API.Infrastructure.Database.DatabaseLogic;
-using Book_App_API.Infrastructure.Database.Logic;
 using Microsoft.EntityFrameworkCore;
 
 public class Program
@@ -21,18 +18,6 @@ public class Program
         {
             optionsBuilder.UseSqlServer(builder.Configuration["DBConnectionString"]!);
         });
-
-        builder.Services.AddScoped<GenreRepository>();
-        builder.Services.AddScoped<GenreLogic>();
-
-        builder.Services.AddScoped<AuthorRepository>();
-        builder.Services.AddScoped<AuthorLogic>();
-
-        builder.Services.AddScoped<ReaderAgeRepository>();
-        builder.Services.AddScoped<ReaderAgeLogic>();
-
-        builder.Services.AddScoped<BookRepository>();
-        builder.Services.AddScoped<BookLogic>();
 
         var app = builder.Build();
 

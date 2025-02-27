@@ -1,4 +1,4 @@
-name: dotNET Book App
+name: dotNET REST API
 
 services:
   project-database:

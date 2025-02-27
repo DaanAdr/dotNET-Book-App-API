@@ -26,7 +26,7 @@ namespace Book_App_API.Controllers
             {
                 List<Author> authors = await _dbContext.Author.AsNoTracking().ToListAsync();
 
-                List<AuthorGetAndDeleteDTO> dtos = authors.Select(a => new AuthorGetAndDeleteDTO
+                List<AuthorGetDTO> dtos = authors.Select(a => new AuthorGetDTO
                 {
                     Id = a.Id,
                     Firstname = a.Firstname,
@@ -35,7 +35,7 @@ namespace Book_App_API.Controllers
 
                 return Ok(dtos);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO: Log the exception
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving authors. Please try again later.");
@@ -48,13 +48,6 @@ namespace Book_App_API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PostAsync([FromBody]AuthorPostDTO author)
         {
-            // Automatic validation of the AuthorDTO based on data annotations
-            //if (!ModelState.IsValid)
-            //{
-            //    // Return a 400 Bad Request with the validation errors
-            //    return BadRequest(ModelState);
-            //}
-
             try
             {
                 Author authorEntity = new Author
@@ -82,12 +75,6 @@ namespace Book_App_API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PatchAsync(int id, [FromBody] AuthorPatchDTO author)
         {
-            //Automatic validation of the AuthorDTO based on data annotations
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-
             try
             {
                 Author? authorToPatch = await _dbContext.Author.FindAsync(id);
